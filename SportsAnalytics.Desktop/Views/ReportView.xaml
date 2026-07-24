@@ -1,0 +1,187 @@
+<UserControl x:Class="SportsAnalytics.Desktop.Views.ReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:SportsAnalytics.Desktop.ViewModels"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1000"
+             d:DataContext="{d:DesignInstance Type=vm:ReportViewModel}">
+    
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+            <Button Content="← رجوع" Command="{Binding GoBackCommand}" Padding="10,5" Margin="0,0,15,0" Background="#f0f0f0"/>
+            <TextBlock Text="{Binding Report.HomeTeam}" FontSize="28" FontWeight="Bold" Foreground="#333"/>
+            <TextBlock Text=" ضد " FontSize="28" FontWeight="Bold" Foreground="#888"/>
+            <TextBlock Text="{Binding Report.AwayTeam}" FontSize="28" FontWeight="Bold" Foreground="#333"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Blended Probabilities -->
+            <Border Background="White" Padding="15" Margin="5" CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="احتمالات النتيجة (Blended)" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="فوز المضيف" Foreground="#555"/>
+                            <TextBlock Text="{Binding Report.BlendHomeWin, StringFormat=P1}" FontSize="22" FontWeight="Bold" Foreground="#007ACC"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="تعادل" Foreground="#555"/>
+                            <TextBlock Text="{Binding Report.BlendDraw, StringFormat=P1}" FontSize="22" FontWeight="Bold" Foreground="#FF9800"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="فوز الضيف" Foreground="#555"/>
+                            <TextBlock Text="{Binding Report.BlendAwayWin, StringFormat=P1}" FontSize="22" FontWeight="Bold" Foreground="#E53935"/>
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Text="{Binding Report.MostLikelyOutcome, StringFormat=أكثر نتيجة متوقعة: {0}}" 
+                               Margin="0,15,0,0" FontWeight="SemiBold" Foreground="#4CAF50"/>
+                </StackPanel>
+            </Border>
+
+            <!-- Risk Score -->
+            <Border Grid.Column="1" Background="White" Padding="15" Margin="5" CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="تحليل المخاطرة (Risk &amp; Value)" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="مستوى المخاطرة:" Foreground="#555" Width="120"/>
+                        <TextBlock Text="{Binding Report.Risk.RiskLevel}" FontWeight="Bold"/>
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="مؤشر المخاطرة:" Foreground="#555" Width="120"/>
+                        <TextBlock Text="{Binding Report.Risk.RiskScore, StringFormat=F1}" FontWeight="Bold"/>
+                        <TextBlock Text=" / 100" Foreground="#888"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="القيمة المتوقعة (EV):" Foreground="#555" Width="120"/>
+                        <TextBlock Text="{Binding Report.Risk.ExpectedValue, StringFormat=F3}" FontWeight="Bold"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                        <TextBlock Text="جودة البيانات:" Foreground="#555" Width="120"/>
+                        <TextBlock Text="{Binding Report.Risk.DataQualityIndicator, StringFormat=P0}" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Models Comparison -->
+            <Border Grid.Column="2" Background="White" Padding="15" Margin="5" CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+                </Border.Effect>
+                <StackPanel>
+                    <TextBlock Text="تفاصيل النماذج" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Dixon-Coles:" Foreground="#555"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Report.DcHomeWin, StringFormat={}{0:P1} / }" FontWeight="SemiBold"/>
+                        
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Elo Rating:" Foreground="#555" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Report.EloRatingHome, StringFormat={}{0:F0} vs }" FontWeight="SemiBold" Margin="0,5,0,0"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="ML.NET:" Foreground="#555" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Report.MlHomeWin, StringFormat={}{0:P1} / }" FontWeight="SemiBold" Margin="0,5,0,0"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <!-- Monte Carlo Chart -->
+        <Border Grid.Row="2" Background="White" Padding="15" Margin="5" CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="توزيع احتمالات النتيجة الدقيقة (Monte Carlo)" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                <lvc:CartesianChart Series="{Binding Series}" 
+                                    XAxes="{Binding XAxes}" 
+                                    YAxes="{Binding YAxes}" 
+                                    Height="300"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Betting Markets -->
+        <Border Grid.Row="3" Background="White" Padding="15" Margin="5,20,5,5" CornerRadius="8">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="10" Opacity="0.1" ShadowDepth="2"/>
+            </Border.Effect>
+            <StackPanel>
+                <TextBlock Text="أسواق المراهنات المدعومة (Betting Markets)" FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+                
+                <ItemsControl ItemsSource="{Binding GroupedBettingMarkets}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,15">
+                                <TextBlock Text="{Binding Key}" FontSize="16" FontWeight="SemiBold" Foreground="#333" Margin="0,0,0,10"/>
+                                
+                                <ItemsControl ItemsSource="{Binding}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#f9f9f9" BorderBrush="#ddd" BorderThickness="1" CornerRadius="5" Padding="10" Margin="0,0,10,10" Width="180">
+                                                <StackPanel>
+                                                    <TextBlock Text="{Binding Selection}" FontWeight="SemiBold" Foreground="#555" TextWrapping="Wrap"/>
+                                                    <TextBlock Text="{Binding Probability, StringFormat={}{0:P1}}" FontSize="18" FontWeight="Bold" Foreground="#007ACC" Margin="0,5,0,0"/>
+                                                    <TextBlock Text="{Binding FairOdds, StringFormat=Fair Odds: {0:F2}}" FontSize="12" Foreground="#888"/>
+                                                </StackPanel>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
+
+        <TextBlock Grid.Row="4" Text="{Binding Report.ComputationMs, StringFormat=وقت التحليل: {0}ms}" 
+                   HorizontalAlignment="Right" Foreground="#AAA" Margin="0,20,5,0"/>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

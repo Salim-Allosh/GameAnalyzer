@@ -1,0 +1,12 @@
+D:\Bets\SportsAnalytics.MathEngine\bin\Debug\net8.0\SportsAnalytics.MathEngine.deps.json
+D:\Bets\SportsAnalytics.MathEngine\bin\Debug\net8.0\SportsAnalytics.MathEngine.dll
+D:\Bets\SportsAnalytics.MathEngine\bin\Debug\net8.0\SportsAnalytics.MathEngine.pdb
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.csproj.AssemblyReference.cache
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.GeneratedMSBuildEditorConfig.editorconfig
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.AssemblyInfoInputs.cache
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.AssemblyInfo.cs
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.csproj.CoreCompileInputs.cache
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.dll
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\refint\SportsAnalytics.MathEngine.dll
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.pdb
+D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\ref\SportsAnalytics.MathEngine.dll

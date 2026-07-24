@@ -1,0 +1,17 @@
+D:\Bets\SportsAnalytics.Infrastructure\bin\Debug\net8.0\SportsAnalytics.Infrastructure.deps.json
+D:\Bets\SportsAnalytics.Infrastructure\bin\Debug\net8.0\SportsAnalytics.Infrastructure.runtimeconfig.json
+D:\Bets\SportsAnalytics.Infrastructure\bin\Debug\net8.0\SportsAnalytics.Infrastructure.dll
+D:\Bets\SportsAnalytics.Infrastructure\bin\Debug\net8.0\SportsAnalytics.Infrastructure.pdb
+D:\Bets\SportsAnalytics.Infrastructure\bin\Debug\net8.0\SportsAnalytics.Domain.dll
+D:\Bets\SportsAnalytics.Infrastructure\bin\Debug\net8.0\SportsAnalytics.Domain.pdb
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.csproj.AssemblyReference.cache
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.AssemblyInfoInputs.cache
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.AssemblyInfo.cs
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAn.F180EF34.Up2Date
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.dll
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\refint\SportsAnalytics.Infrastructure.dll
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.pdb
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.genruntimeconfig.cache
+D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\ref\SportsAnalytics.Infrastructure.dll

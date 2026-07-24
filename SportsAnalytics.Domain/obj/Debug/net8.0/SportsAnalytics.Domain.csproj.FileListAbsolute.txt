@@ -1,0 +1,11 @@
+D:\Bets\SportsAnalytics.Domain\bin\Debug\net8.0\SportsAnalytics.Domain.deps.json
+D:\Bets\SportsAnalytics.Domain\bin\Debug\net8.0\SportsAnalytics.Domain.dll
+D:\Bets\SportsAnalytics.Domain\bin\Debug\net8.0\SportsAnalytics.Domain.pdb
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.AssemblyInfoInputs.cache
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.AssemblyInfo.cs
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.csproj.CoreCompileInputs.cache
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.dll
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\refint\SportsAnalytics.Domain.dll
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.pdb
+D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\ref\SportsAnalytics.Domain.dll
