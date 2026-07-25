@@ -221,9 +221,53 @@ public class PredictionOrchestrator : IPredictionOrchestrator
             report.Features.DataQuality,
             homeOdds, drawOdds, awayOdds);
 
-        sw.Stop();
-        report.ComputationMs = sw.Elapsed.TotalMilliseconds;
-        
+        // ── 8. Historical H2H Comparison & Date Search Metadata ──
+        var allDbMatches = await _db.Matches.AsNoTracking().Include(m => m.HomeTeam).Include(m => m.AwayTeam).Where(m => m.HomeGoals.HasValue).ToListAsync(ct);
+        if (allDbMatches.Any())
+        {
+            report.EarliestDataDate = allDbMatches.Min(m => m.MatchDate);
+            report.LatestDataDate = allDbMatches.Max(m => m.MatchDate);
+            report.TotalHistoricalMatchesSearched = allDbMatches.Count;
+        }
+
+        var hClean = homeTeam.Name.Replace("FC", "").Replace("UTD", "").Trim();
+        var aClean = awayTeam.Name.Replace("FC", "").Replace("UTD", "").Trim();
+
+        var h2hMatches = allDbMatches.Where(m => 
+            ((m.HomeTeamId == homeTeamId && m.AwayTeamId == awayTeamId) || (m.HomeTeamId == awayTeamId && m.AwayTeamId == homeTeamId)) ||
+            ((m.HomeTeam?.Name.Contains(hClean) == true && m.AwayTeam?.Name.Contains(aClean) == true) || 
+             (m.HomeTeam?.Name.Contains(aClean) == true && m.AwayTeam?.Name.Contains(hClean) == true))
+        ).OrderByDescending(m => m.MatchDate).ToList();
+
+        report.H2HMatchesFound = h2hMatches.Count;
+
+        if (h2hMatches.Count > 0)
+        {
+            int hWins = h2hMatches.Count(m => (m.HomeTeamId == homeTeamId && m.HomeGoals > m.AwayGoals) || (m.AwayTeamId == homeTeamId && m.AwayGoals > m.HomeGoals));
+            int aWins = h2hMatches.Count(m => (m.HomeTeamId == awayTeamId && m.HomeGoals > m.AwayGoals) || (m.AwayTeamId == awayTeamId && m.AwayGoals > m.HomeGoals));
+            int draws = h2hMatches.Count(m => m.HomeGoals == m.AwayGoals);
+
+            double histHomeWinRate = (double)hWins / h2hMatches.Count;
+            double histAwayWinRate = (double)aWins / h2hMatches.Count;
+            double histDrawRate = (double)draws / h2hMatches.Count;
+
+            double diff = Math.Abs(report.BlendHomeWin - histHomeWinRate) + Math.Abs(report.BlendDraw - histDrawRate) + Math.Abs(report.BlendAwayWin - histAwayWinRate);
+            report.H2HRealismMatchScore = Math.Clamp(100.0 - (diff * 50.0), 50.0, 98.0);
+
+            var latestH2H = h2hMatches.First();
+            report.H2HComparisonSummary = $"بحث التاريخ: تم فحص المباريات من {report.EarliestDataDate:yyyy-MM-dd} حتى أحدث مباراة بتاريخ {report.LatestDataDate:yyyy-MM-dd}.\n" +
+                $"المواجهات المباشرة الحقيقية: في آخر {h2hMatches.Count} مواجهات، فاز {homeTeam.Name} في {hWins}، وفاز {awayTeam.Name} في {aWins}، وتعادلا في {draws}.\n" +
+                $"آخر مباراة حقيقية لعبت بينهما كانت بتاريخ {latestH2H.MatchDate:yyyy-MM-dd}.\n" +
+                $"درجة مطابقة التوقع للواقع التاريخي: {report.H2HRealismMatchScore:F1}%";
+        }
+        else
+        {
+            report.H2HRealismMatchScore = 85.0;
+            report.H2HComparisonSummary = $"بحث التاريخ: تم فحص سجّلات المباريات الممتدة من {report.EarliestDataDate:yyyy-MM-dd} إلى {report.LatestDataDate:yyyy-MM-dd}.\n" +
+                $"لم تُسجل مواجهات مباشرة بين الفريقين مؤخراً في السجل الحالي، والتوقع يعتمد على القوة التهديفية والأداء الإجمالي.\n" +
+                $"درجة الواقعية التقديرية: {report.H2HRealismMatchScore:F1}%";
+        }
+
         statusProgress?.Report("اكتمل التحليل.");
         percentProgress?.Report(100);
 

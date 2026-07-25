@@ -61,6 +61,14 @@ public class AnalysisReport
     // ── Explanation Table ──
     public List<NumberExplanationItem> NumberExplanations { get; set; } = new();
 
+    // ── H2H Comparison & Historical Search Metadata ──
+    public DateTime? EarliestDataDate { get; set; }
+    public DateTime? LatestDataDate { get; set; }
+    public int TotalHistoricalMatchesSearched { get; set; }
+    public int H2HMatchesFound { get; set; }
+    public string H2HComparisonSummary { get; set; } = string.Empty;
+    public double H2HRealismMatchScore { get; set; }
+
     // ── Elo Ratings ──
     public double EloRatingHome { get; set; }
     public double EloRatingAway { get; set; }

@@ -44,17 +44,36 @@
                 <TextBlock Text="{Binding Report.AwayTeam}" FontSize="28" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <!-- Actual Result Banner (If played) -->
-            <Border Grid.Row="1" Background="#28A745" CornerRadius="8" Padding="15" Margin="10,0,10,20" 
-                    Visibility="{Binding Report.HasActualResult, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <TextBlock Text="نتيجة المباراة الحقيقية السابقة:" Foreground="White" FontSize="20" FontWeight="SemiBold" Margin="0,0,15,0" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Report.HomeTeam}" Foreground="White" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Report.ActualHomeGoals}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center"/>
-                    <TextBlock Text="-" Foreground="White" FontSize="28" FontWeight="Bold" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Report.ActualAwayGoals}" Foreground="White" FontSize="28" FontWeight="Bold" Margin="10,0" VerticalAlignment="Center"/>
-                    <TextBlock Text="{Binding Report.AwayTeam}" Foreground="White" FontSize="24" FontWeight="Bold" VerticalAlignment="Center"/>
-                </StackPanel>
+            <!-- H2H Historical Reality & Date Range Banner -->
+            <Border Grid.Row="1" Background="#2D2D30" BorderBrush="#007ACC" BorderThickness="1" CornerRadius="8" Padding="15" Margin="0,0,0,20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center" Margin="0,0,20,0">
+                        <TextBlock Text="نطاق وتاريخ البحث" Foreground="#AAA" FontSize="13"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                            <TextBlock Text="{Binding Report.EarliestDataDate, StringFormat=من {0:yyyy-MM-dd}}" Foreground="#FFC107" FontWeight="Bold" FontSize="14"/>
+                            <TextBlock Text="  إلى  " Foreground="#AAA" FontSize="14"/>
+                            <TextBlock Text="{Binding Report.LatestDataDate, StringFormat={}{0:yyyy-MM-dd}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="مقارنة التوقع بالواقع التاريخي للمواجهات المباشرة 🔍" Foreground="#007ACC" FontWeight="Bold" FontSize="16" Margin="0,0,0,5"/>
+                        <TextBlock Text="{Binding Report.H2HComparisonSummary}" Foreground="White" FontSize="13" TextWrapping="Wrap" LineHeight="18"/>
+                    </StackPanel>
+
+                    <Border Grid.Column="2" Background="#1E1E1E" CornerRadius="8" Padding="12,8" VerticalAlignment="Center" Margin="15,0,0,0">
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="مطابقة الواقع" Foreground="#AAA" FontSize="11" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Report.H2HRealismMatchScore, StringFormat={}{0:F1}%}" Foreground="#4CAF50" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </Border>
 
             <Grid Grid.Row="2" Margin="0,0,0,20">
