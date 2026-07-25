@@ -75,7 +75,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" HorizontalAlignment="Center">
-                                <TextBlock Text="فوز المضيف" Foreground="#AAA" Margin="0,0,0,5"/>
+                                <TextBlock Text="{Binding Report.HomeTeam, StringFormat=فوز {0}}" Foreground="#AAA" Margin="0,0,0,5"/>
                                 <TextBlock Text="{Binding Report.BlendHomeWin, StringFormat=P1}" FontSize="24" FontWeight="Bold" Foreground="#4CAF50"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" HorizontalAlignment="Center">
@@ -83,7 +83,7 @@
                                 <TextBlock Text="{Binding Report.BlendDraw, StringFormat=P1}" FontSize="24" FontWeight="Bold" Foreground="#FFC107"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" HorizontalAlignment="Center">
-                                <TextBlock Text="فوز الضيف" Foreground="#AAA" Margin="0,0,0,5"/>
+                                <TextBlock Text="{Binding Report.AwayTeam, StringFormat=فوز {0}}" Foreground="#AAA" Margin="0,0,0,5"/>
                                 <TextBlock Text="{Binding Report.BlendAwayWin, StringFormat=P1}" FontSize="24" FontWeight="Bold" Foreground="#F44336"/>
                             </StackPanel>
                         </Grid>

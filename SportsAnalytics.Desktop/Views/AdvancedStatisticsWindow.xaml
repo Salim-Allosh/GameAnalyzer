@@ -99,7 +99,7 @@
         <!-- Tabs -->
         <TabControl Grid.Row="2" Margin="20" Background="Transparent">
             <!-- Home Team Tab -->
-            <TabItem Header="الفريق المضيف">
+            <TabItem Header="{Binding HomeStats.TeamName, FallbackValue='الفريق الأول'}">
                 <Grid Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>
@@ -146,7 +146,7 @@
             </TabItem>
 
             <!-- Away Team Tab -->
-            <TabItem Header="الفريق الضيف">
+            <TabItem Header="{Binding AwayStats.TeamName, FallbackValue='الفريق الثاني'}">
                 <Grid Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"/>

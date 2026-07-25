@@ -82,7 +82,7 @@
                         
                         <!-- Home Team -->
                         <StackPanel Margin="0,0,10,0">
-                            <TextBlock Text="المضيف" Foreground="#AAA" FontSize="12" Margin="0,0,0,5"/>
+                            <TextBlock Text="الفريق الأول" Foreground="#AAA" FontSize="12" Margin="0,0,0,5"/>
                             <ComboBox ItemsSource="{Binding AvailableTeams}" SelectedItem="{Binding ManualHomeTeam}" DisplayMemberPath="Name" Width="150"/>
                         </StackPanel>
 
@@ -90,7 +90,7 @@
 
                         <!-- Away Team -->
                         <StackPanel Margin="0,0,15,0">
-                            <TextBlock Text="الضيف" Foreground="#AAA" FontSize="12" Margin="0,0,0,5"/>
+                            <TextBlock Text="الفريق الثاني" Foreground="#AAA" FontSize="12" Margin="0,0,0,5"/>
                             <ComboBox ItemsSource="{Binding AvailableTeams}" SelectedItem="{Binding ManualAwayTeam}" DisplayMemberPath="Name" Width="150"/>
                         </StackPanel>
 

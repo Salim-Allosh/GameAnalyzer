@@ -362,94 +362,94 @@ public class PredictionOrchestrator : IPredictionOrchestrator
     {
         var list = new List<NumberExplanationItem>();
 
-        // 1. Blended Home Win
+        // 1. Home Win Probability
         list.Add(new NumberExplanationItem
         {
             NumberValue = $"{r.BlendHomeWin:P1}",
-            TeamName = $"{r.HomeTeam} (المضيف)",
-            MetricName = "الاحتمالية النهائية المدمجة - فوز المضيف",
-            Meaning = "احتمالية فوز فريق المضيف بعد دمج نتائج كافة نماذج الذكاء الاصطناعي والإحصاء",
-            SourceCalculation = $"دمج مرجّح (Alpha={r.BlendAlpha:P0}) بين نموذج Dixon-Coles المزدوج ونماذج ML.NET"
+            TeamName = r.HomeTeam,
+            MetricName = $"فرصة فوز {r.HomeTeam}",
+            Meaning = $"الاحتمال الإجمالي المدمج لفوز فريق {r.HomeTeam} بالمباراة بناءً على الأداء والإحصائيات الحقيقية.",
+            SourceCalculation = $"استنتاج خوارزمي يجمع بين القوة التهديفية لـ {r.HomeTeam} ونسبة تفوقه التاريخية أمام المنافس."
         });
 
-        // 2. Blended Draw
+        // 2. Draw Probability
         list.Add(new NumberExplanationItem
         {
             NumberValue = $"{r.BlendDraw:P1}",
-            TeamName = "المباراة (تعادل)",
-            MetricName = "الاحتمالية النهائية المدمجة - التعادل",
-            Meaning = "احتمالية انتهاء المباراة بالتعادل بين الفريقين",
-            SourceCalculation = "تجميع احتمالات التعادل (0-0, 1-1, 2-2...) عبر مصفوفة Dixon-Coles وتحسين ML.NET"
+            TeamName = $"{r.HomeTeam} ضد {r.AwayTeam}",
+            MetricName = "احتمال انتهاء المباراة بالتعادل",
+            Meaning = "نسبة فرصة خروج الفريقين بنتيجة متعادلة (0-0 أو 1-1 أو 2-2).",
+            SourceCalculation = $"تحليل تقارب المستوى التهديفي والدفاعي بين {r.HomeTeam} و {r.AwayTeam} في آخر المباريات."
         });
 
-        // 3. Blended Away Win
+        // 3. Away Win Probability
         list.Add(new NumberExplanationItem
         {
             NumberValue = $"{r.BlendAwayWin:P1}",
-            TeamName = $"{r.AwayTeam} (الضيف)",
-            MetricName = "الاحتمالية النهائية المدمجة - فوز الضيف",
-            Meaning = "احتمالية فوز فريق الضيف بعد الدمج النهائي للنماذج",
-            SourceCalculation = "دمج مرجّح بين نماذج Dixon-Coles ونموذج التعلم الآلي ML.NET"
+            TeamName = r.AwayTeam,
+            MetricName = $"فرصة فوز {r.AwayTeam}",
+            Meaning = $"الاحتمال الإجمالي المدمج لفوز فريق {r.AwayTeam} بالمباراة.",
+            SourceCalculation = $"استنتاج القوة الهجومية والصلابة الدفاعية لـ {r.AwayTeam} ومدى استغلاله للفرص."
         });
 
-        // 4. Dixon-Coles Home Lambda
+        // 4. Home Expected Goals
         list.Add(new NumberExplanationItem
         {
-            NumberValue = $"{r.LambdaHome:F2}",
-            TeamName = $"{r.HomeTeam} (المضيف)",
-            MetricName = "معدل الأهداف المتوقعة λ (Lambda Home)",
-            Meaning = "عدد الأهداف القادمة المتوقعة إحصائياً للمضيف بناءً على قوته الهجومية وضعف دفاع المنافس",
-            SourceCalculation = $"معادلة exp(Atk_{r.HomeTeam} + Def_{r.AwayTeam} + HomeAdvantage)"
+            NumberValue = $"{r.LambdaHome:F2} أهداف",
+            TeamName = r.HomeTeam,
+            MetricName = $"متوسط الأهداف المتوقعة لـ {r.HomeTeam}",
+            Meaning = $"عدد الأهداف المتوقع أن يسجلها {r.HomeTeam} في هذه المباراة.",
+            SourceCalculation = $"محسوب بناءً على معدل تسجيل {r.HomeTeam} للأهداف مؤخراً مقارنة بالأهداف التي يستقبلها دفاع {r.AwayTeam}."
         });
 
-        // 5. Dixon-Coles Away Lambda
+        // 5. Away Expected Goals
         list.Add(new NumberExplanationItem
         {
-            NumberValue = $"{r.LambdaAway:F2}",
-            TeamName = $"{r.AwayTeam} (الضيف)",
-            MetricName = "معدل الأهداف المتوقعة λ (Lambda Away)",
-            Meaning = "عدد الأهداف المتوقعة للضيف بناءً على قوته الهجومية ودفاع المضيف",
-            SourceCalculation = $"معادلة exp(Atk_{r.AwayTeam} + Def_{r.HomeTeam})"
+            NumberValue = $"{r.LambdaAway:F2} أهداف",
+            TeamName = r.AwayTeam,
+            MetricName = $"متوسط الأهداف المتوقعة لـ {r.AwayTeam}",
+            Meaning = $"عدد الأهداف المتوقع أن يسجلها {r.AwayTeam} في هذه المباراة.",
+            SourceCalculation = $"محسوب بناءً على معدل تسجيل {r.AwayTeam} للأهداف مؤخراً مقارنة بضعف دفاع {r.HomeTeam}."
         });
 
-        // 6. Elo Rating Home
+        // 6. Home Power Index (Elo)
         list.Add(new NumberExplanationItem
         {
-            NumberValue = $"{r.EloRatingHome:F0}",
-            TeamName = $"{r.HomeTeam} (المضيف)",
-            MetricName = "تصنيف Elo القوة الدولية",
-            Meaning = "مؤشر القوة التراكمية للفريق بناءً على نتائج مبارياته التاريخية السابقة وحجم المنافسين",
-            SourceCalculation = "خوارزمية Elo Rating (K-Factor = 32) المطبقة على نتائج آخر موسمين"
+            NumberValue = $"{r.EloRatingHome:F0} نقطة",
+            TeamName = r.HomeTeam,
+            MetricName = $"مؤشر تصنيف القوة التراكمي لـ {r.HomeTeam}",
+            Meaning = $"مقياس القوة الحقيقية لـ {r.HomeTeam} مقارنة بجميع فرق الدوري في البطولات الرسمية.",
+            SourceCalculation = $"مستخرج من نتائج جميع المباريات السابقة التي خاضها {r.HomeTeam} وحجم منافسيه."
         });
 
-        // 7. Elo Rating Away
+        // 7. Away Power Index (Elo)
         list.Add(new NumberExplanationItem
         {
-            NumberValue = $"{r.EloRatingAway:F0}",
-            TeamName = $"{r.AwayTeam} (الضيف)",
-            MetricName = "تصنيف Elo القوة الدولية",
-            Meaning = "مؤشر القوة التراكمية لفريق الضيف",
-            SourceCalculation = "خوارزمية Elo Rating التراكمية بناءً على نتائج المباريات الرسمية"
+            NumberValue = $"{r.EloRatingAway:F0} نقطة",
+            TeamName = r.AwayTeam,
+            MetricName = $"مؤشر تصنيف القوة التراكمي لـ {r.AwayTeam}",
+            Meaning = $"مقياس القوة الحقيقية لـ {r.AwayTeam} في المباريات المباشرة والبطولات الرسمية.",
+            SourceCalculation = $"مستخرج من نتائج وتاريخ المباريات الرسمية السابقة لـ {r.AwayTeam}."
         });
 
-        // 8. Risk Score
+        // 8. Risk Level
         list.Add(new NumberExplanationItem
         {
             NumberValue = $"{r.Risk.RiskScore:F1} / 100",
-            TeamName = "المباراة ككل",
-            MetricName = "مؤشر المخاطرة (Risk Score)",
-            Meaning = "درجة خطورة وعدم يقين التوقع (كلما ارتفع الرقم زادت درجة المخاطرة في الرهان)",
-            SourceCalculation = "حساب انحراف Shannon Entropy + تشتت النماذج + تباين القيمة المتوقعة EV"
+            TeamName = $"{r.HomeTeam} - {r.AwayTeam}",
+            MetricName = "درجة خطورة الرهان (Risk Score)",
+            Meaning = "مؤشر يبين مدى تقارب المباراة وعدم حسمها (كلما قل الرقم كانت النتيجة أكثر ضماناً وأقل مخاطرة).",
+            SourceCalculation = $"تقييم مدى تباين الفرص وتقارب نتائج {r.HomeTeam} و {r.AwayTeam} الإحصائية."
         });
 
-        // 9. Data Quality
+        // 9. Data Accuracy
         list.Add(new NumberExplanationItem
         {
             NumberValue = $"{r.Features.DataQuality:P0}",
-            TeamName = "قاعدة البيانات",
-            MetricName = "جودة واكتمال البيانات (Data Quality)",
-            Meaning = "نسبة اكتمال البيانات التاريخية والإحصائيات المتاحة للفريقين",
-            SourceCalculation = "نسبة المباريات المكتملة المتوفرة للفريقين مقارنة بـ 10 مباريات سابقة لكل فريق"
+            TeamName = "المعلومات والسجلات",
+            MetricName = "نسبة اكتمال بيانات وتاريخ الفريقين",
+            Meaning = "درجة الموثوقية في عدد المباريات السابقة المتاحة في الأرشيف للفريقين.",
+            SourceCalculation = $"نسبة السجلات والإحصائيات المكتملة المتوفرة لـ {r.HomeTeam} و {r.AwayTeam} من المباريات الأخيرة."
         });
 
         return list;
