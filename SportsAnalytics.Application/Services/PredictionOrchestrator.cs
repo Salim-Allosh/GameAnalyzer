@@ -221,14 +221,25 @@ public class PredictionOrchestrator : IPredictionOrchestrator
             report.Features.DataQuality,
             homeOdds, drawOdds, awayOdds);
 
-        // ── 8. Historical H2H Comparison & Date Search Metadata ──
+        // ── 8. API Current Month Date Range & H2H Comparison ──
         var allDbMatches = await _db.Matches.AsNoTracking().Include(m => m.HomeTeam).Include(m => m.AwayTeam).Where(m => m.HomeGoals.HasValue).ToListAsync(ct);
-        if (allDbMatches.Any())
+        var apiFixtures = await _db.Matches.AsNoTracking().Where(m => !m.HomeGoals.HasValue).ToListAsync(ct);
+
+        // API Current Month Date Range
+        DateTime currentMonthStart = new DateTime(matchDate.Year, matchDate.Month, 1);
+        DateTime currentMonthEnd = new DateTime(matchDate.Year, matchDate.Month, DateTime.DaysInMonth(matchDate.Year, matchDate.Month));
+
+        if (apiFixtures.Any())
         {
-            report.EarliestDataDate = allDbMatches.Min(m => m.MatchDate);
-            report.LatestDataDate = allDbMatches.Max(m => m.MatchDate);
-            report.TotalHistoricalMatchesSearched = allDbMatches.Count;
+            report.EarliestDataDate = apiFixtures.Min(m => m.MatchDate);
+            report.LatestDataDate = apiFixtures.Max(m => m.MatchDate);
         }
+        else
+        {
+            report.EarliestDataDate = currentMonthStart;
+            report.LatestDataDate = currentMonthEnd;
+        }
+        report.TotalHistoricalMatchesSearched = allDbMatches.Count + apiFixtures.Count;
 
         var hClean = homeTeam.Name.Replace("FC", "").Replace("UTD", "").Trim();
         var aClean = awayTeam.Name.Replace("FC", "").Replace("UTD", "").Trim();
@@ -255,15 +266,15 @@ public class PredictionOrchestrator : IPredictionOrchestrator
             report.H2HRealismMatchScore = Math.Clamp(100.0 - (diff * 50.0), 50.0, 98.0);
 
             var latestH2H = h2hMatches.First();
-            report.H2HComparisonSummary = $"بحث التاريخ: تم فحص المباريات من {report.EarliestDataDate:yyyy-MM-dd} حتى أحدث مباراة بتاريخ {report.LatestDataDate:yyyy-MM-dd}.\n" +
+            report.H2HComparisonSummary = $"توقيت رزنامة الـ API للشهر الحالي: من {report.EarliestDataDate:yyyy-MM-dd} إلى {report.LatestDataDate:yyyy-MM-dd}.\n" +
                 $"المواجهات المباشرة الحقيقية: في آخر {h2hMatches.Count} مواجهات، فاز {homeTeam.Name} في {hWins}، وفاز {awayTeam.Name} في {aWins}، وتعادلا في {draws}.\n" +
-                $"آخر مباراة حقيقية لعبت بينهما كانت بتاريخ {latestH2H.MatchDate:yyyy-MM-dd}.\n" +
+                $"آخر مباراة رسمية بينهما كانت بتاريخ {latestH2H.MatchDate:yyyy-MM-dd}.\n" +
                 $"درجة مطابقة التوقع للواقع التاريخي: {report.H2HRealismMatchScore:F1}%";
         }
         else
         {
             report.H2HRealismMatchScore = 85.0;
-            report.H2HComparisonSummary = $"بحث التاريخ: تم فحص سجّلات المباريات الممتدة من {report.EarliestDataDate:yyyy-MM-dd} إلى {report.LatestDataDate:yyyy-MM-dd}.\n" +
+            report.H2HComparisonSummary = $"توقيت رزنامة الـ API للشهر الحالي: من {report.EarliestDataDate:yyyy-MM-dd} إلى {report.LatestDataDate:yyyy-MM-dd}.\n" +
                 $"لم تُسجل مواجهات مباشرة بين الفريقين مؤخراً في السجل الحالي، والتوقع يعتمد على القوة التهديفية والأداء الإجمالي.\n" +
                 $"درجة الواقعية التقديرية: {report.H2HRealismMatchScore:F1}%";
         }
