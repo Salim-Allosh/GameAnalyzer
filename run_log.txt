@@ -26,3 +26,4 @@ D:\Bets\SportsAnalytics.Desktop\SportsAnalytics.Desktop.csproj : warning NU1701:
     0 Error(s)
 
 Time Elapsed 00:00:01.64
+^C

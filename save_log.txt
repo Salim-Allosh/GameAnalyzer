@@ -1,17 +1,3 @@
 ========================================= 
-Starting save and sync at 25/07/2026 19:01:18.12 
+Starting save and sync at 25/07/2026 20:28:04.32 
 ========================================= 
-warning: in the working copy of 'SportsAnalytics.Infrastructure/Data/DatabaseSeeder.cs', LF will be replaced by CRLF the next time Git touches it
-[master 586a65b] Auto-update at 25/07/2026 19:01:18.87
- 95 files changed, 143 insertions(+), 25 deletions(-)
- create mode 100644 SportsAnalytics.Desktop/obj/Debug/net8.0-windows/SportsAnalytics.Desktop_tywggcxn_wpftmp.AssemblyInfo.cs
- create mode 100644 SportsAnalytics.Desktop/obj/Debug/net8.0-windows/SportsAnalytics.Desktop_tywggcxn_wpftmp.AssemblyInfoInputs.cache
- create mode 100644 SportsAnalytics.Desktop/obj/Debug/net8.0-windows/SportsAnalytics.Desktop_tywggcxn_wpftmp.GeneratedMSBuildEditorConfig.editorconfig
- create mode 100644 SportsAnalytics.Desktop/obj/Debug/net8.0-windows/SportsAnalytics.Desktop_tywggcxn_wpftmp.GlobalUsings.g.cs
- create mode 100644 SportsAnalytics.Desktop/obj/Debug/net8.0-windows/SportsAnalytics.Desktop_tywggcxn_wpftmp.assets.cache
- create mode 100644 SportsAnalytics.Desktop/obj/Debug/net8.0-windows/SportsAnalytics.Desktop_tywggcxn_wpftmp.sourcelink.json
- delete mode 100644 SportsAnalytics_dev.db
- delete mode 100644 SportsAnalytics_dev.db.lite
-branch 'master' set up to track 'origin/master'.
-To https://github.com/Salim-Allosh/GameAnalyzer.git
-   7fe07f3..586a65b  master -> master
