@@ -58,6 +58,9 @@ public class AnalysisReport
     // ── Betting Markets ──
     public List<BettingMarketPrediction> BettingMarkets { get; set; } = new();
 
+    // ── Explanation Table ──
+    public List<NumberExplanationItem> NumberExplanations { get; set; } = new();
+
     // ── Elo Ratings ──
     public double EloRatingHome { get; set; }
     public double EloRatingAway { get; set; }

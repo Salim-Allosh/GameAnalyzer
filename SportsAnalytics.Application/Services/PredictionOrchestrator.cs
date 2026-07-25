@@ -227,6 +227,8 @@ public class PredictionOrchestrator : IPredictionOrchestrator
         statusProgress?.Report("اكتمل التحليل.");
         percentProgress?.Report(100);
 
+        report.NumberExplanations = BuildNumberExplanations(report);
+
         try
         {
             SaveDetailedLog(report);
@@ -354,5 +356,102 @@ public class PredictionOrchestrator : IPredictionOrchestrator
         sb.AppendLine("==================================================");
 
         File.WriteAllText(path, sb.ToString(), System.Text.Encoding.UTF8);
+    }
+
+    private static List<NumberExplanationItem> BuildNumberExplanations(AnalysisReport r)
+    {
+        var list = new List<NumberExplanationItem>();
+
+        // 1. Blended Home Win
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.BlendHomeWin:P1}",
+            TeamName = $"{r.HomeTeam} (المضيف)",
+            MetricName = "الاحتمالية النهائية المدمجة - فوز المضيف",
+            Meaning = "احتمالية فوز فريق المضيف بعد دمج نتائج كافة نماذج الذكاء الاصطناعي والإحصاء",
+            SourceCalculation = $"دمج مرجّح (Alpha={r.BlendAlpha:P0}) بين نموذج Dixon-Coles المزدوج ونماذج ML.NET"
+        });
+
+        // 2. Blended Draw
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.BlendDraw:P1}",
+            TeamName = "المباراة (تعادل)",
+            MetricName = "الاحتمالية النهائية المدمجة - التعادل",
+            Meaning = "احتمالية انتهاء المباراة بالتعادل بين الفريقين",
+            SourceCalculation = "تجميع احتمالات التعادل (0-0, 1-1, 2-2...) عبر مصفوفة Dixon-Coles وتحسين ML.NET"
+        });
+
+        // 3. Blended Away Win
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.BlendAwayWin:P1}",
+            TeamName = $"{r.AwayTeam} (الضيف)",
+            MetricName = "الاحتمالية النهائية المدمجة - فوز الضيف",
+            Meaning = "احتمالية فوز فريق الضيف بعد الدمج النهائي للنماذج",
+            SourceCalculation = "دمج مرجّح بين نماذج Dixon-Coles ونموذج التعلم الآلي ML.NET"
+        });
+
+        // 4. Dixon-Coles Home Lambda
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.LambdaHome:F2}",
+            TeamName = $"{r.HomeTeam} (المضيف)",
+            MetricName = "معدل الأهداف المتوقعة λ (Lambda Home)",
+            Meaning = "عدد الأهداف القادمة المتوقعة إحصائياً للمضيف بناءً على قوته الهجومية وضعف دفاع المنافس",
+            SourceCalculation = $"معادلة exp(Atk_{r.HomeTeam} + Def_{r.AwayTeam} + HomeAdvantage)"
+        });
+
+        // 5. Dixon-Coles Away Lambda
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.LambdaAway:F2}",
+            TeamName = $"{r.AwayTeam} (الضيف)",
+            MetricName = "معدل الأهداف المتوقعة λ (Lambda Away)",
+            Meaning = "عدد الأهداف المتوقعة للضيف بناءً على قوته الهجومية ودفاع المضيف",
+            SourceCalculation = $"معادلة exp(Atk_{r.AwayTeam} + Def_{r.HomeTeam})"
+        });
+
+        // 6. Elo Rating Home
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.EloRatingHome:F0}",
+            TeamName = $"{r.HomeTeam} (المضيف)",
+            MetricName = "تصنيف Elo القوة الدولية",
+            Meaning = "مؤشر القوة التراكمية للفريق بناءً على نتائج مبارياته التاريخية السابقة وحجم المنافسين",
+            SourceCalculation = "خوارزمية Elo Rating (K-Factor = 32) المطبقة على نتائج آخر موسمين"
+        });
+
+        // 7. Elo Rating Away
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.EloRatingAway:F0}",
+            TeamName = $"{r.AwayTeam} (الضيف)",
+            MetricName = "تصنيف Elo القوة الدولية",
+            Meaning = "مؤشر القوة التراكمية لفريق الضيف",
+            SourceCalculation = "خوارزمية Elo Rating التراكمية بناءً على نتائج المباريات الرسمية"
+        });
+
+        // 8. Risk Score
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.Risk.RiskScore:F1} / 100",
+            TeamName = "المباراة ككل",
+            MetricName = "مؤشر المخاطرة (Risk Score)",
+            Meaning = "درجة خطورة وعدم يقين التوقع (كلما ارتفع الرقم زادت درجة المخاطرة في الرهان)",
+            SourceCalculation = "حساب انحراف Shannon Entropy + تشتت النماذج + تباين القيمة المتوقعة EV"
+        });
+
+        // 9. Data Quality
+        list.Add(new NumberExplanationItem
+        {
+            NumberValue = $"{r.Features.DataQuality:P0}",
+            TeamName = "قاعدة البيانات",
+            MetricName = "جودة واكتمال البيانات (Data Quality)",
+            Meaning = "نسبة اكتمال البيانات التاريخية والإحصائيات المتاحة للفريقين",
+            SourceCalculation = "نسبة المباريات المكتملة المتوفرة للفريقين مقارنة بـ 10 مباريات سابقة لكل فريق"
+        });
+
+        return list;
     }
 }

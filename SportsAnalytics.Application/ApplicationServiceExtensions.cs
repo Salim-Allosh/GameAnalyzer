@@ -37,8 +37,9 @@ public static class ApplicationServiceExtensions
         services.AddScoped<NewsImpactAnalyzer>();
 
         // ── Background Services (Self-Learning Loop & Kaggle Data Ingestion) ──
+        services.AddSingleton<KaggleDataIngestor>();
+        services.AddHostedService<KaggleDataIngestor>(sp => sp.GetRequiredService<KaggleDataIngestor>());
         services.AddHostedService<SelfLearningService>();
-        services.AddHostedService<KaggleDataIngestor>();
 
         // ── Quartz Scheduling ──
         services.AddQuartz(q =>

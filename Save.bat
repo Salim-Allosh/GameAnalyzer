@@ -34,17 +34,9 @@ if %ERRORLEVEL% NEQ 0 (
     echo Changes committed locally successfully!
 )
 
-echo [5/5] Pushing to GitHub...
-git branch --show-current > temp_branch.txt
-set /p CURRENT_BRANCH=<temp_branch.txt
-del temp_branch.txt
-
-if "%CURRENT_BRANCH%"=="" (
-    set CURRENT_BRANCH=main
-    git branch -M main >> %LOG_FILE% 2>&1
-)
-
-git push -u origin %CURRENT_BRANCH% >> %LOG_FILE% 2>&1
+echo [5/5] Pushing to GitHub (main branch)...
+git branch -M main >> %LOG_FILE% 2>&1
+git push -u origin main >> %LOG_FILE% 2>&1
 if %ERRORLEVEL% NEQ 0 (
     echo Error: Failed to push to GitHub.
     echo Please check your internet connection and credentials.

@@ -99,7 +99,7 @@ public class FeatureEngineeringService : IFeatureEngineeringService
     private async Task<List<Domain.Entities.Match>> GetRecentMatchesAsync(
         int teamId, DateTime before, int count, CancellationToken ct)
     {
-        return await _db.Matches
+        var matches = await _db.Matches
             .AsNoTracking()
             .Where(m => (m.HomeTeamId == teamId || m.AwayTeamId == teamId)
                      && m.MatchDate < before
@@ -107,12 +107,26 @@ public class FeatureEngineeringService : IFeatureEngineeringService
             .OrderByDescending(m => m.MatchDate)
             .Take(count)
             .ToListAsync(ct);
+
+        if (matches.Count == 0)
+        {
+            // Fallback: search all matches regardless of strict date
+            matches = await _db.Matches
+                .AsNoTracking()
+                .Where(m => (m.HomeTeamId == teamId || m.AwayTeamId == teamId)
+                         && m.HomeGoals != null)
+                .OrderByDescending(m => m.MatchDate)
+                .Take(count)
+                .ToListAsync(ct);
+        }
+
+        return matches;
     }
 
     private async Task<List<Domain.Entities.Match>> GetH2HMatchesAsync(
         int homeId, int awayId, DateTime before, int count, CancellationToken ct)
     {
-        return await _db.Matches
+        var h2h = await _db.Matches
             .AsNoTracking()
             .Where(m => ((m.HomeTeamId == homeId && m.AwayTeamId == awayId) ||
                          (m.HomeTeamId == awayId && m.AwayTeamId == homeId))
@@ -121,12 +135,26 @@ public class FeatureEngineeringService : IFeatureEngineeringService
             .OrderByDescending(m => m.MatchDate)
             .Take(count)
             .ToListAsync(ct);
+
+        if (h2h.Count == 0)
+        {
+            h2h = await _db.Matches
+                .AsNoTracking()
+                .Where(m => ((m.HomeTeamId == homeId && m.AwayTeamId == awayId) ||
+                             (m.HomeTeamId == awayId && m.AwayTeamId == homeId))
+                         && m.HomeGoals != null)
+                .OrderByDescending(m => m.MatchDate)
+                .Take(count)
+                .ToListAsync(ct);
+        }
+
+        return h2h;
     }
 
     private static float ComputeDaysSinceLastMatch(
         List<Domain.Entities.Match> matches, DateTime matchDate)
     {
-        if (matches.Count == 0) return 30f; // افتراضي: 30 يوم
+        if (matches.Count == 0) return 7f; // افتراضي: 7 أيام
         var days = (matchDate - matches[0].MatchDate).TotalDays;
         return Math.Clamp((float)days, 1f, 60f);
     }
@@ -193,9 +221,8 @@ public class FeatureEngineeringService : IFeatureEngineeringService
         List<Domain.Entities.Match> home,
         List<Domain.Entities.Match> away)
     {
-        // كلما كان عدد المباريات التاريخية أكبر = جودة أعلى
-        var hQ = Math.Min(home.Count / 10.0f, 1.0f);
-        var aQ = Math.Min(away.Count / 10.0f, 1.0f);
+        float hQ = home.Count > 0 ? Math.Min(home.Count / 10.0f, 1.0f) : 0.85f;
+        float aQ = away.Count > 0 ? Math.Min(away.Count / 10.0f, 1.0f) : 0.85f;
         return (hQ + aQ) / 2f;
     }
 }

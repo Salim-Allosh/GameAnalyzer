@@ -59,15 +59,19 @@ public partial class App : WpfApplication
     {
         base.OnStartup(e);
 
-        // 1. تجهيز قاعدة البيانات قبل تشغيل الواجهة لتجنب مشكلة الـ ViewModel
+        // 1. تجهيز قاعدة البيانات وتغذيتها ببيانات Kaggle الحقيقية
         using (var scope = ServiceProvider.CreateScope())
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<SqliteDbContext>();
             var apiClient = scope.ServiceProvider.GetRequiredService<SportsAnalytics.Infrastructure.ExternalServices.ApiFootballClient>();
             await DatabaseSeeder.SeedAsync(dbContext, apiClient);
+
+            // قراءة ملفات Kaggle الحقيقية تلقائياً وبنائها في قاعدة البيانات
+            var kaggleIngestor = scope.ServiceProvider.GetRequiredService<SportsAnalytics.Application.Services.KaggleDataIngestor>();
+            await kaggleIngestor.IngestPendingFilesAsync();
         }
 
-        // Train Models Asynchronously on Startup
+        // Train Models Asynchronously on Startup with Real Kaggle Matches
         _ = Task.Run(async () =>
         {
             try
@@ -75,7 +79,7 @@ public partial class App : WpfApplication
                 using (var taskScope = ServiceProvider.CreateScope())
                 {
                     var matchRepo = taskScope.ServiceProvider.GetRequiredService<SportsAnalytics.Domain.Interfaces.IMatchRepository>();
-                    var allMatches = await matchRepo.GetAllMatchesAsync(5000);
+                    var allMatches = await matchRepo.GetAllMatchesAsync(10000);
                     var pastMatches = allMatches.Where(m => m.MatchDate <= DateTime.UtcNow).OrderBy(m => m.MatchDate).ToList();
 
                     if (pastMatches.Count > 0)
@@ -83,26 +87,26 @@ public partial class App : WpfApplication
                         var records = pastMatches.Select(m => new SportsAnalytics.MathEngine.MatchRecord(
                             m.HomeTeam?.Name ?? "", m.AwayTeam?.Name ?? "", m.MatchDate, m.HomeGoals ?? 0, m.AwayGoals ?? 0)).ToList();
 
-                        // Train Elo (Singleton)
-                        var elo = taskScope.ServiceProvider.GetRequiredService<SportsAnalytics.MathEngine.EloRating>();
-                        elo.TrainOnHistory(records);
-
-                        // Train Dixon-Coles (Singleton)
                         var dixon = taskScope.ServiceProvider.GetRequiredService<SportsAnalytics.MathEngine.PoissonDixonColes>();
-                        dixon.Train(records);
-
-                        // Train ML Predictor (on a subset to keep startup fast) (Singleton)
-                        var featuresSvc = taskScope.ServiceProvider.GetRequiredService<SportsAnalytics.Domain.Interfaces.IFeatureEngineeringService>();
                         var mlPredictor = taskScope.ServiceProvider.GetRequiredService<SportsAnalytics.Application.Services.MLMatchPredictor>();
-                        
-                        var trainingData = new List<(SportsAnalytics.Domain.Models.MatchFeatures Features, int Outcome)>();
-                        foreach (var m in pastMatches.Skip(pastMatches.Count - 150)) // last 150 matches for fast training
+                        var elo = taskScope.ServiceProvider.GetRequiredService<SportsAnalytics.MathEngine.EloRating>();
+
+                        // التدريب الكامل يتم مرة واحدة فقط عند البداية إذا لم تكن النماذج مدربة
+                        if (!dixon.IsTrained || !mlPredictor.IsTrained)
                         {
-                            var f = await featuresSvc.ComputeAsync(m.HomeTeamId, m.AwayTeamId, m.MatchDate, default);
-                            int outcome = m.HomeGoals > m.AwayGoals ? 0 : m.HomeGoals == m.AwayGoals ? 1 : 2;
-                            trainingData.Add((f, outcome));
+                            elo.TrainOnHistory(records);
+                            dixon.Train(records);
+
+                            var featuresSvc = taskScope.ServiceProvider.GetRequiredService<SportsAnalytics.Domain.Interfaces.IFeatureEngineeringService>();
+                            var trainingData = new List<(SportsAnalytics.Domain.Models.MatchFeatures Features, int Outcome)>();
+                            foreach (var m in pastMatches.Skip(Math.Max(0, pastMatches.Count - 300))) // Train on 300 real matches
+                            {
+                                var f = await featuresSvc.ComputeAsync(m.HomeTeamId, m.AwayTeamId, m.MatchDate, default);
+                                int outcome = m.HomeGoals > m.AwayGoals ? 0 : m.HomeGoals == m.AwayGoals ? 1 : 2;
+                                trainingData.Add((f, outcome));
+                            }
+                            mlPredictor.Train(trainingData);
                         }
-                        mlPredictor.Train(trainingData);
                     }
                 }
             }

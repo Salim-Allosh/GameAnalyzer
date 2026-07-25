@@ -179,8 +179,50 @@
                 </Border>
             </Grid>
 
-            <!-- Betting Markets -->
+            <!-- Numbers & Statistics Explanation Table -->
             <Border Grid.Row="3" Style="{StaticResource ModernCardStyle}">
+                <StackPanel>
+                    <TextBlock Text="جدول تفصيل ودلالة الأرقام والحسابات الإحصائية 📊" FontSize="18" FontWeight="Bold" Foreground="#007ACC" Margin="0,0,0,15"/>
+                    <TextBlock Text="يوضح هذا الجدول مصدر كل رقم ظاهر في الشاشة، الفريق التابع له، طريقة حسابه الرياضية، ودلالته العملية في التوقع." Foreground="#AAA" Margin="0,0,0,15" TextWrapping="Wrap"/>
+                    
+                    <DataGrid ItemsSource="{Binding Report.NumberExplanations}" AutoGenerateColumns="False" 
+                              Background="#1E1E1E" RowBackground="#252526" AlternatingRowBackground="#2D2D30" 
+                              Foreground="White" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#3F3F46" 
+                              HeadersVisibility="Column" BorderThickness="0" CanUserAddRows="False" IsReadOnly="True">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#333337"/>
+                                <Setter Property="Foreground" Value="#007ACC"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Padding" Value="10,8"/>
+                                <Setter Property="FontSize" Value="14"/>
+                            </Style>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Padding" Value="10,8"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="DataGridCell">
+                                            <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
+                                                <ContentPresenter VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="الرقم / النسبة" Binding="{Binding NumberValue}" FontWeight="Bold" Width="130"/>
+                            <DataGridTextColumn Header="الفريق / الجهة" Binding="{Binding TeamName}" Foreground="#FFC107" Width="150"/>
+                            <DataGridTextColumn Header="المؤشر" Binding="{Binding MetricName}" FontWeight="SemiBold" Width="200"/>
+                            <DataGridTextColumn Header="الدلالة والمعنى الإحصائي" Binding="{Binding Meaning}" Width="*"/>
+                            <DataGridTextColumn Header="طريقة الحساب والمصدر" Binding="{Binding SourceCalculation}" Foreground="#AAA" Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+
+            <!-- Betting Markets -->
+            <Border Grid.Row="4" Style="{StaticResource ModernCardStyle}">
                 <StackPanel>
                     <TextBlock Text="أسواق المراهنات المدعومة (Betting Markets)" FontSize="18" FontWeight="Bold" Foreground="White" Margin="0,0,0,20"/>
                     
@@ -215,7 +257,7 @@
                 </StackPanel>
             </Border>
 
-            <TextBlock Grid.Row="4" Text="{Binding Report.ComputationMs, StringFormat=وقت التحليل: {0:F0} ms}" 
+            <TextBlock Grid.Row="5" Text="{Binding Report.ComputationMs, StringFormat=وقت التحليل: {0:F0} ms}" 
                        HorizontalAlignment="Right" Foreground="#555" Margin="0,20,10,0" FontSize="12"/>
         </Grid>
     </ScrollViewer>
