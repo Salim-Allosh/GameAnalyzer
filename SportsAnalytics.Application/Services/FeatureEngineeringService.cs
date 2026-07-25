@@ -35,20 +35,20 @@ public class FeatureEngineeringService : IFeatureEngineeringService
         DateTime matchDate,
         CancellationToken ct = default)
     {
-        var homeTeam = await _db.Teams.FindAsync([homeTeamId], ct)
-            ?? throw new ArgumentException($"الفريق {homeTeamId} غير موجود.");
-        var awayTeam = await _db.Teams.FindAsync([awayTeamId], ct)
-            ?? throw new ArgumentException($"الفريق {awayTeamId} غير موجود.");
+        var homeTeamObj = await _db.Teams.AsNoTracking().FirstOrDefaultAsync(t => t.Id == homeTeamId, ct);
+        var awayTeamObj = await _db.Teams.AsNoTracking().FirstOrDefaultAsync(t => t.Id == awayTeamId, ct);
 
-        // ── جلب آخر 10 مباريات لكل فريق قبل تاريخ المباراة ──
-        var homeMatches = await GetRecentMatchesAsync(homeTeamId, matchDate, 10, ct);
-        var awayMatches = await GetRecentMatchesAsync(awayTeamId, matchDate, 10, ct);
-        var h2hMatches  = await GetH2HMatchesAsync(homeTeamId, awayTeamId, matchDate, 5, ct);
+        string hClean = homeTeamObj?.Name.Replace("FC", "").Replace("UTD", "").Replace("City", "").Trim().ToLower() ?? "";
+        string aClean = awayTeamObj?.Name.Replace("FC", "").Replace("UTD", "").Replace("City", "").Trim().ToLower() ?? "";
 
-        var features = new MatchFeatures
+        var homeMatches = await GetRecentMatchesAsync(homeTeamId, hClean, matchDate, 10, ct);
+        var awayMatches = await GetRecentMatchesAsync(awayTeamId, aClean, matchDate, 10, ct);
+        var h2hMatches  = await GetH2HMatchesAsync(homeTeamId, awayTeamId, hClean, aClean, matchDate, 10, ct);
+
+        var features = new Domain.Models.MatchFeatures
         {
-            HomeTeam  = homeTeam.Name,
-            AwayTeam  = awayTeam.Name,
+            HomeTeam  = homeTeamObj?.Name ?? "Unknown",
+            AwayTeam  = awayTeamObj?.Name ?? "Unknown",
             MatchDate = matchDate,
 
             // ── راحة الفريق ──
@@ -71,9 +71,9 @@ public class FeatureEngineeringService : IFeatureEngineeringService
             H2HAvgTotalGoals  = ComputeH2HAvgGoals(h2hMatches),
 
             // ── Elo ──
-            EloHome = (float)_elo.GetRating(homeTeam.Name),
-            EloAway = (float)_elo.GetRating(awayTeam.Name),
-            EloDiff = (float)(_elo.GetRating(homeTeam.Name) - _elo.GetRating(awayTeam.Name)),
+            EloHome = (float)_elo.GetRating(homeTeamObj?.Name ?? ""),
+            EloAway = (float)_elo.GetRating(awayTeamObj?.Name ?? ""),
+            EloDiff = (float)(_elo.GetRating(homeTeamObj?.Name ?? "") - _elo.GetRating(awayTeamObj?.Name ?? "")),
 
             // ── جودة البيانات ──
             DataQuality = ComputeDataQuality(homeMatches, awayMatches),
@@ -81,10 +81,10 @@ public class FeatureEngineeringService : IFeatureEngineeringService
 
         // ── مخرجات Dixon-Coles (إذا مُدرَّب) ──
         if (_dixonColes.IsTrained &&
-            _dixonColes.AttackParams.ContainsKey(homeTeam.Name) &&
-            _dixonColes.AttackParams.ContainsKey(awayTeam.Name))
+            _dixonColes.AttackParams.ContainsKey(features.HomeTeam) &&
+            _dixonColes.AttackParams.ContainsKey(features.AwayTeam))
         {
-            var (lH, lA) = _dixonColes.ComputeLambdas(homeTeam.Name, awayTeam.Name);
+            var (lH, lA) = _dixonColes.ComputeLambdas(features.HomeTeam, features.AwayTeam);
             features.DixonColesLambdaHome = (float)lH;
             features.DixonColesLambdaAway = (float)lA;
         }
@@ -97,56 +97,44 @@ public class FeatureEngineeringService : IFeatureEngineeringService
     // ────────────────────────────────────────────────────────────
 
     private async Task<List<Domain.Entities.Match>> GetRecentMatchesAsync(
-        int teamId, DateTime before, int count, CancellationToken ct)
+        int teamId, string cleanName, DateTime before, int count, CancellationToken ct)
     {
         var matches = await _db.Matches
             .AsNoTracking()
-            .Where(m => (m.HomeTeamId == teamId || m.AwayTeamId == teamId)
-                     && m.MatchDate < before
-                     && m.HomeGoals != null)
+            .Include(m => m.HomeTeam)
+            .Include(m => m.AwayTeam)
+            .Where(m => m.HomeGoals != null && (
+                m.HomeTeamId == teamId || m.AwayTeamId == teamId ||
+                (!string.IsNullOrEmpty(cleanName) && (
+                    (m.HomeTeam != null && m.HomeTeam.Name.ToLower().Contains(cleanName)) ||
+                    (m.AwayTeam != null && m.AwayTeam.Name.ToLower().Contains(cleanName))
+                ))
+            ))
             .OrderByDescending(m => m.MatchDate)
             .Take(count)
             .ToListAsync(ct);
-
-        if (matches.Count == 0)
-        {
-            // Fallback: search all matches regardless of strict date
-            matches = await _db.Matches
-                .AsNoTracking()
-                .Where(m => (m.HomeTeamId == teamId || m.AwayTeamId == teamId)
-                         && m.HomeGoals != null)
-                .OrderByDescending(m => m.MatchDate)
-                .Take(count)
-                .ToListAsync(ct);
-        }
 
         return matches;
     }
 
     private async Task<List<Domain.Entities.Match>> GetH2HMatchesAsync(
-        int homeId, int awayId, DateTime before, int count, CancellationToken ct)
+        int homeId, int awayId, string hClean, string aClean, DateTime before, int count, CancellationToken ct)
     {
         var h2h = await _db.Matches
             .AsNoTracking()
-            .Where(m => ((m.HomeTeamId == homeId && m.AwayTeamId == awayId) ||
-                         (m.HomeTeamId == awayId && m.AwayTeamId == homeId))
-                     && m.MatchDate < before
-                     && m.HomeGoals != null)
+            .Include(m => m.HomeTeam)
+            .Include(m => m.AwayTeam)
+            .Where(m => m.HomeGoals != null && (
+                ((m.HomeTeamId == homeId && m.AwayTeamId == awayId) || (m.HomeTeamId == awayId && m.AwayTeamId == homeId)) ||
+                (!string.IsNullOrEmpty(hClean) && !string.IsNullOrEmpty(aClean) && (
+                    (m.HomeTeam != null && m.AwayTeam != null &&
+                        ((m.HomeTeam.Name.ToLower().Contains(hClean) && m.AwayTeam.Name.ToLower().Contains(aClean)) ||
+                         (m.HomeTeam.Name.ToLower().Contains(aClean) && m.AwayTeam.Name.ToLower().Contains(hClean))))
+                ))
+            ))
             .OrderByDescending(m => m.MatchDate)
             .Take(count)
             .ToListAsync(ct);
-
-        if (h2h.Count == 0)
-        {
-            h2h = await _db.Matches
-                .AsNoTracking()
-                .Where(m => ((m.HomeTeamId == homeId && m.AwayTeamId == awayId) ||
-                             (m.HomeTeamId == awayId && m.AwayTeamId == homeId))
-                         && m.HomeGoals != null)
-                .OrderByDescending(m => m.MatchDate)
-                .Take(count)
-                .ToListAsync(ct);
-        }
 
         return h2h;
     }

@@ -66,23 +66,36 @@ public class PoissonDixonColes
 
     // ── حساب Lambda ──
 
+    public string ResolveTeamKey(string teamName)
+    {
+        if (string.IsNullOrWhiteSpace(teamName)) return teamName;
+        if (AttackParams.ContainsKey(teamName)) return teamName;
+
+        var clean = teamName.Replace("FC", "").Replace("UTD", "").Replace("City", "").Trim().ToLower();
+        var key = AttackParams.Keys.FirstOrDefault(k => 
+            k.ToLower().Contains(clean) || 
+            clean.Contains(k.Replace("FC", "").Replace("UTD", "").Replace("City", "").Trim().ToLower()));
+
+        return key ?? teamName;
+    }
+
     /// <summary>
     /// يحسب λHome وλAway لمباراة بين فريقين محددين.
     /// </summary>
     public (double LambdaHome, double LambdaAway) ComputeLambdas(string homeTeam, string awayTeam)
     {
-        if (!IsTrained)
-            throw new InvalidOperationException("النموذج لم يُدرَّب بعد.");
+        string hKey = ResolveTeamKey(homeTeam);
+        string aKey = ResolveTeamKey(awayTeam);
 
-        if (!AttackParams.ContainsKey(homeTeam))
-            throw new KeyNotFoundException($"الفريق غير موجود: {homeTeam}");
-        if (!AttackParams.ContainsKey(awayTeam))
-            throw new KeyNotFoundException($"الفريق غير موجود: {awayTeam}");
+        if (!IsTrained || !AttackParams.ContainsKey(hKey) || !AttackParams.ContainsKey(aKey))
+        {
+            return (1.6, 1.0); // Baseline expected goals if team not found in training params
+        }
 
-        var atkHome = AttackParams[homeTeam];
-        var defHome = DefenseParams[homeTeam];
-        var atkAway = AttackParams[awayTeam];
-        var defAway = DefenseParams[awayTeam];
+        var atkHome = AttackParams[hKey];
+        var defHome = DefenseParams[hKey];
+        var atkAway = AttackParams[aKey];
+        var defAway = DefenseParams[aKey];
 
         var lambdaHome = Math.Exp(atkHome + defAway + HomeAdvantage);
         var lambdaAway = Math.Exp(atkAway + defHome);
