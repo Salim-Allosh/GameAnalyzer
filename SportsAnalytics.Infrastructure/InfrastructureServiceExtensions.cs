@@ -39,6 +39,7 @@ public static class InfrastructureServiceExtensions
         services.AddHttpClient<INewsProvider, ExternalServices.NewsApiClient>();
         
         services.AddHttpClient<ExternalServices.EspnApiClient>();
+        services.AddHttpClient<ExternalServices.ApiFootballClient>();
 
         return services;
     }

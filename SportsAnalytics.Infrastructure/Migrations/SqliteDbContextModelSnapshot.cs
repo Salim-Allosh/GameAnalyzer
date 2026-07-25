@@ -118,9 +118,15 @@ namespace SportsAnalytics.Infrastructure.Migrations
                     b.Property<int>("MatchId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("MatchId1")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MatchId")
+                        .IsUnique();
+
+                    b.HasIndex("MatchId1")
                         .IsUnique();
 
                     b.ToTable("MatchStatistics");
@@ -167,6 +173,15 @@ namespace SportsAnalytics.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int?>("ActualAwayGoals")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("ActualHomeGoals")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ActualResult")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("AwayWinProbability")
                         .HasColumnType("REAL");
 
@@ -178,6 +193,9 @@ namespace SportsAnalytics.Infrastructure.Migrations
 
                     b.Property<double>("HomeWinProbability")
                         .HasColumnType("REAL");
+
+                    b.Property<bool>("IsCompleted")
+                        .HasColumnType("INTEGER");
 
                     b.Property<double>("LambdaAway")
                         .HasColumnType("REAL");
@@ -263,6 +281,10 @@ namespace SportsAnalytics.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("SportsAnalytics.Domain.Entities.Match", null)
+                        .WithOne("Statistics")
+                        .HasForeignKey("SportsAnalytics.Domain.Entities.MatchStatistics", "MatchId1");
+
                     b.Navigation("Match");
                 });
 
@@ -286,6 +308,11 @@ namespace SportsAnalytics.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Match");
+                });
+
+            modelBuilder.Entity("SportsAnalytics.Domain.Entities.Match", b =>
+                {
+                    b.Navigation("Statistics");
                 });
 #pragma warning restore 612, 618
         }

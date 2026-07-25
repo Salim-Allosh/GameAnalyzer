@@ -27,12 +27,70 @@ public partial class MatchSelectionViewModel : ViewModelBase
     [ObservableProperty]
     private bool _isEmpty;
 
+    [ObservableProperty]
+    private ObservableCollection<string> _availableLeagues = new();
+
+    private string? _selectedLeague;
+    public string? SelectedLeague
+    {
+        get => _selectedLeague;
+        set
+        {
+            SetProperty(ref _selectedLeague, value);
+            FilterTeamsByLeague();
+            FilterMatchesByLeague();
+        }
+    }
+
+    [ObservableProperty]
+    private ObservableCollection<Match> _filteredMatches = new();
+
+    [ObservableProperty]
+    private ObservableCollection<Team> _availableTeams = new();
+
+    [ObservableProperty]
+    private Team? _manualHomeTeam;
+
+    [ObservableProperty]
+    private Team? _manualAwayTeam;
+
+    private List<Team> _allTeams = new();
+
     public MatchSelectionViewModel(IMatchRepository matchRepo, IServiceProvider serviceProvider, IFixtureSyncService fixtureSync)
     {
         _matchRepo = matchRepo;
         _serviceProvider = serviceProvider;
         _fixtureSync = fixtureSync;
-        _ = LoadMatchesAsync();
+        _ = LoadInitialDataAsync();
+    }
+
+    private async Task LoadInitialDataAsync()
+    {
+        await LoadTeamsAsync();
+        await LoadMatchesAsync();
+    }
+
+    private async Task LoadTeamsAsync()
+    {
+        _allTeams = (await _matchRepo.GetAllTeamsAsync()).ToList();
+        var leagues = _allTeams.Select(t => t.League).Where(l => !string.IsNullOrEmpty(l)).Distinct().OrderBy(l => l);
+        AvailableLeagues.Clear();
+        foreach (var l in leagues) AvailableLeagues.Add(l);
+        
+        if (string.IsNullOrEmpty(SelectedLeague) && AvailableLeagues.Any())
+        {
+            SelectedLeague = AvailableLeagues.First();
+        }
+    }
+
+    private void FilterTeamsByLeague()
+    {
+        AvailableTeams.Clear();
+        if (string.IsNullOrEmpty(SelectedLeague)) return;
+        var teams = _allTeams.Where(t => t.League == SelectedLeague).OrderBy(t => t.Name);
+        foreach (var t in teams) AvailableTeams.Add(t);
+        ManualHomeTeam = null;
+        ManualAwayTeam = null;
     }
 
     public async Task LoadMatchesAsync()
@@ -44,16 +102,51 @@ public partial class MatchSelectionViewModel : ViewModelBase
             Matches.Add(match);
         }
         
-        IsEmpty = Matches.Count == 0;
+        FilterMatchesByLeague();
+    }
+
+    private void FilterMatchesByLeague()
+    {
+        FilteredMatches.Clear();
+        var matchesToDisplay = string.IsNullOrEmpty(SelectedLeague) 
+            ? Matches 
+            : Matches.Where(m => m.League == SelectedLeague);
+
+        foreach (var m in matchesToDisplay)
+        {
+            FilteredMatches.Add(m);
+        }
+
+        IsEmpty = FilteredMatches.Count == 0;
     }
 
     [RelayCommand]
-    private void AnalyzeMatch()
+    private void AnalyzeMatch(Match match)
     {
-        if (SelectedMatch == null) return;
+        if (match == null) return;
 
         var processingVm = _serviceProvider.GetRequiredService<ProcessingViewModel>();
-        processingVm.Initialize(SelectedMatch);
+        processingVm.Initialize(match);
+        WeakReferenceMessenger.Default.Send(new NavigationMessage(processingVm));
+    }
+
+    [RelayCommand]
+    private void AnalyzeManualMatch()
+    {
+        if (ManualHomeTeam == null || ManualAwayTeam == null || ManualHomeTeam.Id == ManualAwayTeam.Id) return;
+
+        var manualMatch = new Match
+        {
+            HomeTeamId = ManualHomeTeam.Id,
+            AwayTeamId = ManualAwayTeam.Id,
+            HomeTeam = ManualHomeTeam,
+            AwayTeam = ManualAwayTeam,
+            League = SelectedLeague ?? string.Empty,
+            MatchDate = DateTime.Now
+        };
+
+        var processingVm = _serviceProvider.GetRequiredService<ProcessingViewModel>();
+        processingVm.Initialize(manualMatch);
         WeakReferenceMessenger.Default.Send(new NavigationMessage(processingVm));
     }
 
@@ -72,5 +165,12 @@ public partial class MatchSelectionViewModel : ViewModelBase
         await LoadMatchesAsync(); // Refresh grid
         
         IsSyncing = false;
+    }
+
+    [RelayCommand]
+    private void OpenArchive()
+    {
+        var archiveVm = _serviceProvider.GetRequiredService<PredictionArchiveViewModel>();
+        WeakReferenceMessenger.Default.Send(new NavigationMessage(archiveVm));
     }
 }

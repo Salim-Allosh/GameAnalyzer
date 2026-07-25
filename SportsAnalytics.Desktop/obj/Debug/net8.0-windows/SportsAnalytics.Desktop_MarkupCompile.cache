@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 D:\Bets\SportsAnalytics.Desktop\App.xaml
-4-1456963444
-
-131371643392
-252887338799
-MainWindow.xaml;Views\MatchSelectionView.xaml;Views\ProcessingView.xaml;Views\ReportView.xaml;
+6-2136747371
+79423269358
+17-1992510165
+269284929161
+MainWindow.xaml;Views\AdvancedStatisticsWindow.xaml;Views\MatchSelectionView.xaml;Views\PredictionArchiveView.xaml;Views\ProcessingView.xaml;Views\ReportView.xaml;
 
 False
 

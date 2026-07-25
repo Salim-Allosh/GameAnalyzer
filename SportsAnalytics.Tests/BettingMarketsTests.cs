@@ -10,15 +10,11 @@ public class BettingMarketsTests
     public void BettingMarketsCalculator_ShouldCalculateProbabilitiesCorrectly()
     {
         // Arrange
-        var simulator = new MonteCarloSimulator();
-        simulator.MinIterations = 1000;
-        simulator.MaxIterations = 1000; // اجبار المحاكاة على 1000 لسرعة الاختبار
-        
-        var simulationResult = simulator.Simulate(1.5, 1.0); // Home favored
+        var exactGrid = PoissonDixonColes.ComputeOutcomesFromLambdas(1.5, 1.0, -0.1);
         var calculator = new BettingMarketsCalculator();
 
         // Act
-        var markets = calculator.CalculateMarkets(simulationResult, "Team A", "Team B");
+        var markets = calculator.CalculateMarkets(exactGrid, "Team A", "Team B");
 
         // Assert
         Assert.NotEmpty(markets);

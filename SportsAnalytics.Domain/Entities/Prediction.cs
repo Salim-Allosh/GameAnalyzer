@@ -16,4 +16,10 @@ public class Prediction
     public double RiskScore { get; set; }
     public string ModelVersion { get; set; } = string.Empty;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+
+    // --- Archive Fields ---
+    public bool IsCompleted { get; set; } = false;
+    public int? ActualHomeGoals { get; set; }
+    public int? ActualAwayGoals { get; set; }
+    public string? ActualResult { get; set; } // "1", "X", "2"
 }

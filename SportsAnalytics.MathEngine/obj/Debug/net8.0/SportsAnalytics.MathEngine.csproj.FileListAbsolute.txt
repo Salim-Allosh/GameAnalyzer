@@ -10,3 +10,4 @@ D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.d
 D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\refint\SportsAnalytics.MathEngine.dll
 D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.pdb
 D:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\ref\SportsAnalytics.MathEngine.dll
+d:\Bets\SportsAnalytics.MathEngine\obj\Debug\net8.0\SportsAnalytics.MathEngine.sourcelink.json

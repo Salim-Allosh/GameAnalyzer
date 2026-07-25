@@ -18,5 +18,7 @@ public interface IPredictionOrchestrator
         double? homeOdds = null,
         double? drawOdds = null,
         double? awayOdds = null,
+        IProgress<string>? statusProgress = null,
+        IProgress<int>? percentProgress = null,
         CancellationToken ct = default);
 }

@@ -9,3 +9,4 @@ D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.dll
 D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\refint\SportsAnalytics.Domain.dll
 D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.pdb
 D:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\ref\SportsAnalytics.Domain.dll
+d:\Bets\SportsAnalytics.Domain\obj\Debug\net8.0\SportsAnalytics.Domain.sourcelink.json

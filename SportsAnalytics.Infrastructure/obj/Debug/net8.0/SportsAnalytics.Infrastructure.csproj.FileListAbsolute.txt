@@ -15,3 +15,4 @@ D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\refint\SportsAnalytics.I
 D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.pdb
 D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.genruntimeconfig.cache
 D:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\ref\SportsAnalytics.Infrastructure.dll
+d:\Bets\SportsAnalytics.Infrastructure\obj\Debug\net8.0\SportsAnalytics.Infrastructure.sourcelink.json

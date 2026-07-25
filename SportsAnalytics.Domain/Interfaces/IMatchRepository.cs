@@ -13,4 +13,5 @@ public interface IMatchRepository
     Task AddAsync(Match match);
     Task AddRangeAsync(IEnumerable<Match> matches);
     Task<IEnumerable<Match>> GetAllMatchesAsync(int count = 50);
+    Task<IEnumerable<Team>> GetAllTeamsAsync();
 }

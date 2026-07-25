@@ -73,8 +73,8 @@ public class SqliteDbContext : DbContext
             e.HasKey(ms => ms.Id);
             e.Property(ms => ms.DataSource).HasMaxLength(100);
             e.HasOne(ms => ms.Match)
-             .WithMany()
-             .HasForeignKey(ms => ms.MatchId)
+             .WithOne(m => m.Statistics)
+             .HasForeignKey<MatchStatistics>(ms => ms.MatchId)
              .OnDelete(DeleteBehavior.Cascade);
             e.HasIndex(ms => ms.MatchId).IsUnique();
         });

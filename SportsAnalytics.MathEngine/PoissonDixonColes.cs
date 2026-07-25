@@ -96,42 +96,69 @@ public class PoissonDixonColes
     /// يحسب احتمالات فوز المضيف، التعادل، وفوز الضيف
     /// من خلال جمع احتمالات Poisson لكل نتيجة (0-0 حتى 10-10).
     /// </summary>
-    public (double HomeWin, double Draw, double AwayWin) ComputeOutcomeProbabilities(
-        string homeTeam, string awayTeam)
-    {
-        var (lambdaHome, lambdaAway) = ComputeLambdas(homeTeam, awayTeam);
-        return ComputeOutcomesFromLambdas(lambdaHome, lambdaAway);
-    }
 
-    public static (double HomeWin, double Draw, double AwayWin) ComputeOutcomesFromLambdas(
-        double lambdaHome, double lambdaAway, int maxGoals = 10)
+
+    public static double[,] ComputeOutcomesFromLambdas(
+        double lambdaHome, double lambdaAway, double rho, int maxGoals = 14)
     {
-        double homeWin = 0, draw = 0, awayWin = 0;
+        var grid = new double[maxGoals + 1, maxGoals + 1];
+        double total = 0;
 
         for (int h = 0; h <= maxGoals; h++)
         {
             for (int a = 0; a <= maxGoals; a++)
             {
-                var p = PoissonPmf(lambdaHome, h) * PoissonPmf(lambdaAway, a);
-
-                // تصحيح Dixon-Coles للنتائج المنخفضة (0-0، 1-0، 0-1، 1-1)
-                // يُطبَّق تصحيح بسيط — الـ rho يُعالج في نسخة متقدمة
-                if (h < a) awayWin += p;
-                else if (h > a) homeWin += p;
-                else draw += p;
+                var p = PoissonPmf(lambdaHome, h) * PoissonPmf(lambdaAway, a) * CalculateTau(h, a, lambdaHome, lambdaAway, rho);
+                grid[h, a] = p;
+                total += p;
             }
         }
 
         // تطبيع للتأكد من أن المجموع = 1
-        var total = homeWin + draw + awayWin;
         if (total > 0)
         {
-            homeWin /= total;
-            draw /= total;
-            awayWin /= total;
+            for (int h = 0; h <= maxGoals; h++)
+                for (int a = 0; a <= maxGoals; a++)
+                    grid[h, a] /= total;
+        }
+
+        return grid;
+    }
+
+    public static double CalculateTau(int h, int a, double lambdaHome, double lambdaAway, double rho)
+    {
+        if (h == 0 && a == 0) return 1.0 - (lambdaHome * lambdaAway * rho);
+        if (h == 0 && a == 1) return 1.0 + (lambdaHome * rho);
+        if (h == 1 && a == 0) return 1.0 + (lambdaAway * rho);
+        if (h == 1 && a == 1) return 1.0 - rho;
+        return 1.0;
+    }
+
+    public (double HomeWin, double Draw, double AwayWin) ComputeOutcomeProbabilities(
+        string homeTeam, string awayTeam)
+    {
+        var grid = ComputeExactGrid(homeTeam, awayTeam);
+        
+        double homeWin = 0, draw = 0, awayWin = 0;
+        int maxGoals = grid.GetLength(0) - 1;
+
+        for (int h = 0; h <= maxGoals; h++)
+        {
+            for (int a = 0; a <= maxGoals; a++)
+            {
+                if (h > a) homeWin += grid[h, a];
+                else if (h == a) draw += grid[h, a];
+                else awayWin += grid[h, a];
+            }
         }
 
         return (homeWin, draw, awayWin);
+    }
+
+    public double[,] ComputeExactGrid(string homeTeam, string awayTeam)
+    {
+        var (lambdaHome, lambdaAway) = ComputeLambdas(homeTeam, awayTeam);
+        return ComputeOutcomesFromLambdas(lambdaHome, lambdaAway, RhoCorrection);
     }
 
     // ── Brier Score ──
@@ -213,6 +240,9 @@ public class PoissonDixonColes
         List<string> teams)
     {
         double ll = 0;
+        // Clamp rho to prevent unbounded divergence in unconstrained GD
+        double rho = pm.ContainsKey("rho") ? Math.Max(-0.2, Math.Min(0.2, pm["rho"])) : -0.1;
+        
         foreach (var m in matches)
         {
             if (!pm.ContainsKey($"atk_{m.HomeTeam}") || !pm.ContainsKey($"atk_{m.AwayTeam}"))
@@ -221,11 +251,12 @@ public class PoissonDixonColes
             var lambdaHome = Math.Exp(pm[$"atk_{m.HomeTeam}"] + pm[$"def_{m.AwayTeam}"] + pm["home"]);
             var lambdaAway = Math.Exp(pm[$"atk_{m.AwayTeam}"] + pm[$"def_{m.HomeTeam}"]);
 
+            var tau = CalculateTau(m.HomeGoals, m.AwayGoals, lambdaHome, lambdaAway, rho);
             var pH = PoissonPmf(lambdaHome, m.HomeGoals);
             var pA = PoissonPmf(lambdaAway, m.AwayGoals);
 
-            if (pH <= 0 || pA <= 0) continue;
-            ll += Math.Log(pH) + Math.Log(pA);
+            if (tau <= 0 || pH <= 0 || pA <= 0) continue;
+            ll += Math.Log(tau) + Math.Log(pH) + Math.Log(pA);
         }
         return ll;
     }
@@ -241,6 +272,7 @@ public class PoissonDixonColes
         var x = (double[])x0.Clone();
         const double epsilon = 1e-5;
         double prevLoss = f(x);
+        if (double.IsNaN(prevLoss) || double.IsInfinity(prevLoss)) prevLoss = 1000.0;
 
         for (int iter = 0; iter < maxIter; iter++)
         {
@@ -249,14 +281,23 @@ public class PoissonDixonColes
             {
                 var xPlus = (double[])x.Clone();
                 xPlus[i] += epsilon;
-                grad[i] = (f(xPlus) - prevLoss) / epsilon;
+                var lossPlus = f(xPlus);
+                if (double.IsNaN(lossPlus) || double.IsInfinity(lossPlus)) lossPlus = prevLoss;
+                grad[i] = (lossPlus - prevLoss) / epsilon;
+                if (double.IsNaN(grad[i]) || double.IsInfinity(grad[i])) grad[i] = 0;
             }
 
             // تحديث المعاملات
             for (int i = 0; i < x.Length; i++)
+            {
                 x[i] -= learningRate * grad[i];
+                // سقف المعاملات لمنع الانفجار
+                x[i] = Math.Clamp(x[i], -3.0, 3.0);
+            }
 
             var loss = f(x);
+            if (double.IsNaN(loss) || double.IsInfinity(loss)) loss = prevLoss;
+            
             if (Math.Abs(prevLoss - loss) < 1e-8) break; // convergence
             prevLoss = loss;
 

@@ -121,3 +121,181 @@ D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Di
 D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Diagnostics.Abstractions.dll
 D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Http.dll
 D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+d:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\SportsAnalytics.Desktop.sourcelink.json
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\AC Milan.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Al Ahly.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Al Ittihad Alexandria.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Al Masry.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Al-Mokawloon al-Arab.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Alaves.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Almeria.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Angers.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Arsenal.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Aston Villa.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Atalanta.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Athletic Club.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Atletico Madrid.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Augsburg.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Auxerre.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Barcelona.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Bayer Leverkusen.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Bayern Munich.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Bologna.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Borussia Dortmund.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Borussia Mönchengladbach.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Bournemouth.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Brentford.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Brest.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Brighton and Hove Albion.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Cadiz.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Cagliari.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Celta Vigo.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Ceramica Cleopatra.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Chelsea.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Como.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Coventry City.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Crystal Palace.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Dortmund.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Eintracht Frankfurt.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\El Gouna.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Elversberg.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\ENPPI.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Everton.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Fiorentina.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Freiburg.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Frosinone.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Fulham.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Genoa.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Getafe.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Ghazl El Mahalla.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Girona.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Granada.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Hamburg.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Haras El Hodoud.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Hoffenheim.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Inter Milan.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Ismaily.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Juventus.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Las Palmas.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Le Havre.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Le Mans.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Lens.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Lille.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Liverpool.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Lorient.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Lyon.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Mallorca.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Manchester City.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Manchester United.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Marseille.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Napoli.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Osasuna.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\PSG.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Rayo Vallecano.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\RB Leipzig.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Real Betis.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Real Madrid.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Real Sociedad.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Sevilla.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Tottenham.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Valencia.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Villarreal.png
+D:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Assets\Logos\Zamalek.png
+D:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\SportsAnalytics.Desktop_Content.g.cs
+d:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\AdvancedStatisticsWindow.g.cs
+d:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\AdvancedStatisticsWindow.baml
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.CommandLine.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.EnvironmentVariables.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.Json.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Configuration.UserSecrets.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Hosting.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Hosting.Abstractions.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Configuration.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Console.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Debug.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.EventLog.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.EventSource.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.ML.FastTree.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.ML.LightGbm.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\System.Diagnostics.EventLog.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\linux-x64\native\lib_lightgbm.so
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\osx-x64\native\lib_lightgbm.dylib
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\win-x64\native\lib_lightgbm.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\win-x64\native\lightgbm.exe
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\linux-x64\native\libFastTreeNative.so
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\osx-x64\native\libFastTreeNative.dylib
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\win-x64\native\FastTreeNative.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\win-x86\native\FastTreeNative.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Humanizer.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.CodeAnalysis.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.CodeAnalysis.CSharp.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.CodeAnalysis.Workspaces.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Microsoft.EntityFrameworkCore.Design.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\Mono.TextTemplating.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\System.Composition.AttributedModel.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\System.Composition.Convention.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\System.Composition.Hosting.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\System.Composition.Runtime.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\System.Composition.TypedParts.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\System.IO.Pipelines.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\cs\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\de\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\es\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\fr\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\it\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ja\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ko\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pl\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pt-BR\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ru\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\tr\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+d:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\PredictionArchiveView.g.cs
+d:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\PredictionArchiveView.baml

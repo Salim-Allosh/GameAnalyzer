@@ -7,7 +7,7 @@
         xmlns:views="clr-namespace:SportsAnalytics.Desktop.Views"
         mc:Ignorable="d"
         Title="نظام تحليل وتنبؤ رياضي" Height="700" Width="1000"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
         FontFamily="Segoe UI" FontSize="14">
     
     <Window.Resources>
@@ -19,6 +19,9 @@
         </DataTemplate>
         <DataTemplate DataType="{x:Type vm:ReportViewModel}">
             <views:ReportView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:PredictionArchiveViewModel}">
+            <views:PredictionArchiveView />
         </DataTemplate>
     </Window.Resources>
 

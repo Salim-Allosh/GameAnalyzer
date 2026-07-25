@@ -16,6 +16,11 @@ public class AnalysisReport
     public DateTime MatchDate { get; set; }
     public string League { get; set; } = string.Empty;
 
+    // ── النتيجة الحقيقية (إن وُجدت) ──
+    public int? ActualHomeGoals { get; set; }
+    public int? ActualAwayGoals { get; set; }
+    public bool HasActualResult => ActualHomeGoals.HasValue && ActualAwayGoals.HasValue;
+
     // ── احتمالات كل نموذج ──
     public double DcHomeWin { get; set; }
     public double DcDraw { get; set; }
@@ -42,6 +47,7 @@ public class AnalysisReport
     public int McIterations { get; set; }
     public double McStdError { get; set; }
     public List<(int Home, int Away, double Prob)> TopScores { get; set; } = [];
+    public double[,] ExactProbabilityMatrix { get; set; } = new double[0, 0];
 
     // ── Feature Engineering ──
     public MatchFeatures Features { get; set; } = new();

@@ -16,6 +16,12 @@ public partial class ProcessingViewModel : ViewModelBase
     [ObservableProperty]
     private string _statusMessage = "جاري التحليل...";
 
+    [ObservableProperty]
+    private int _progressValue = 0;
+
+    [ObservableProperty]
+    private bool _isIndeterminate = true;
+
     public ProcessingViewModel(IPredictionOrchestrator orchestrator, IServiceProvider serviceProvider)
     {
         _orchestrator = orchestrator;
@@ -25,6 +31,8 @@ public partial class ProcessingViewModel : ViewModelBase
     public void Initialize(Match match)
     {
         StatusMessage = $"جاري تحليل مباراة: {match.HomeTeam.Name} ضد {match.AwayTeam.Name} ...";
+        ProgressValue = 0;
+        IsIndeterminate = false;
         _ = RunAnalysisAsync(match);
     }
 
@@ -32,7 +40,12 @@ public partial class ProcessingViewModel : ViewModelBase
     {
         try
         {
-            var report = await _orchestrator.AnalyzeAsync(match.HomeTeamId, match.AwayTeamId, match.MatchDate);
+            var statusProg = new Progress<string>(msg => StatusMessage = msg);
+            var percentProg = new Progress<int>(val => ProgressValue = val);
+
+            // Execute on background thread to prevent UI lockups
+            var report = await Task.Run(() => 
+                _orchestrator.AnalyzeAsync(match.HomeTeamId, match.AwayTeamId, match.MatchDate, null, null, null, statusProg, percentProg));
 
             // Navigate to report view
             var reportVm = _serviceProvider.GetRequiredService<ReportViewModel>();
@@ -41,6 +54,7 @@ public partial class ProcessingViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
+            IsIndeterminate = true;
             StatusMessage = $"حدث خطأ أثناء التحليل: {ex.Message}";
         }
     }

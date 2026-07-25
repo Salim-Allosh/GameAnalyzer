@@ -33,6 +33,12 @@ public static class ApplicationServiceExtensions
         services.AddScoped<NewsAggregatorService>();
         services.AddScoped<BettingMarketsCalculator>();
         services.AddScoped<IFixtureSyncService, Services.FixtureSyncService>();
+        services.AddScoped<TeamStatisticsService>();
+        services.AddScoped<NewsImpactAnalyzer>();
+
+        // ── Background Services (Self-Learning Loop & Kaggle Data Ingestion) ──
+        services.AddHostedService<SelfLearningService>();
+        services.AddHostedService<KaggleDataIngestor>();
 
         // ── Quartz Scheduling ──
         services.AddQuartz(q =>

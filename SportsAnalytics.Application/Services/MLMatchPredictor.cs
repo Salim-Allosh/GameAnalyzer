@@ -65,10 +65,11 @@ public class MLMatchPredictor
             .Append(_mlContext.Transforms.Conversion
                 .MapValueToKey("Label", "Label"))
             .Append(_mlContext.MulticlassClassification.Trainers
-                .SdcaMaximumEntropy(
+                .LightGbm(
                     labelColumnName: "Label",
                     featureColumnName: "Features",
-                    maximumNumberOfIterations: 200))
+                    numberOfLeaves: 31,
+                    minimumExampleCountPerLeaf: 1))
             .Append(_mlContext.Transforms.Conversion
                 .MapKeyToValue("PredictedLabel"));
 

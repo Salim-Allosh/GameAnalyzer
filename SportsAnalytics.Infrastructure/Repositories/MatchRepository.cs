@@ -58,4 +58,12 @@ public class MatchRepository : IMatchRepository
             .Take(count)
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<Team>> GetAllTeamsAsync()
+    {
+        return await _db.Teams
+            .AsNoTracking()
+            .OrderBy(t => t.Name)
+            .ToListAsync();
+    }
 }

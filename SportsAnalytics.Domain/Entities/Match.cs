@@ -15,4 +15,5 @@ public class Match
     public int? AwayGoals { get; set; }
     public string League { get; set; } = string.Empty;
     public string Season { get; set; } = string.Empty;
+    public MatchStatistics? Statistics { get; set; }
 }

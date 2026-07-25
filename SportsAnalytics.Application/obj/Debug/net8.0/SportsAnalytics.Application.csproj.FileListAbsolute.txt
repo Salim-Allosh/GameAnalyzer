@@ -17,3 +17,4 @@ D:\Bets\SportsAnalytics.Application\obj\Debug\net8.0\SportsAnalytics.Application
 D:\Bets\SportsAnalytics.Application\obj\Debug\net8.0\ref\SportsAnalytics.Application.dll
 D:\Bets\SportsAnalytics.Application\bin\Debug\net8.0\SportsAnalytics.Infrastructure.dll
 D:\Bets\SportsAnalytics.Application\bin\Debug\net8.0\SportsAnalytics.Infrastructure.pdb
+d:\Bets\SportsAnalytics.Application\obj\Debug\net8.0\SportsAnalytics.Application.sourcelink.json

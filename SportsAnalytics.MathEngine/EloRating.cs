@@ -12,7 +12,7 @@ public class EloRating
     private readonly Dictionary<string, double> _ratings = new();
 
     public const double DefaultRating = 1500.0;
-    public const double KFactor = 32.0;  // حساسية التحديث
+    public const double KFactor = 20.0;  // حساسية التحديث
     public const double HomeAdvantagePoints = 50.0; // إضافة ميزة الأرض
 
     public IReadOnlyDictionary<string, double> Ratings => _ratings;
