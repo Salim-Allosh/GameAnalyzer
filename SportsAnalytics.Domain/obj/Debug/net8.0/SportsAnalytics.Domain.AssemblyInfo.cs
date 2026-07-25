@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SportsAnalytics.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c7d78f7733952912a5fc1a635f4a49579da9ae5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6bcb3516a62879a34661d6b751ee77ae358a1bfd")]
 [assembly: System.Reflection.AssemblyProductAttribute("SportsAnalytics.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SportsAnalytics.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
