@@ -1,0 +1,109 @@
+﻿==================================================
+تفاصيل تحليل مباراة: Wolves ضد Arsenal
+التاريخ: 2026-07-26
+الدوري: Premier League
+وقت التحليل: 26/07/2026 8:10:49 AM
+زمن الحساب: 0.00 ms
+==================================================
+
+[1] هندسة الميزات (Feature Engineering)
+  - أيام الراحة: المضيف (60.0 أيام) | الضيف (60.0 أيام)
+  - الفورمة (آخر 5): المضيف (0.0%) | الضيف (100.0%)
+  - أهداف مسجلة (متوسط): المضيف (0.60) | الضيف (1.60)
+  - أهداف مستقبلة (متوسط): المضيف (3.00) | الضيف (0.60)
+  - المواجهات المباشرة (H2H): نسبة فوز المضيف (0.0%) | التعادل (0.0%)
+  - جودة البيانات التاريخية: 100.0%
+
+[2] نموذج Poisson / Dixon-Coles
+  - قوة الهجوم المتوقعة (Lambda): المضيف = 0.758 | الضيف = 1.892
+  - الاحتمالات المستنتجة: فوز المضيف (13.80%) | تعادل (22.48%) | فوز الضيف (63.73%)
+
+[3] نموذج Elo Rating
+  - تصنيف Elo الحالي: المضيف (1441.7) | الضيف (1773.0)
+  - الاحتمالات المستنتجة: فوز المضيف (11.90%) | تعادل (28.00%) | فوز الضيف (60.10%)
+
+[4] محاكاة Monte Carlo
+  - عدد التكرارات: 14,000
+  - هامش الخطأ القياسي: 0.00296
+  - الاحتمالات المستنتجة: فوز المضيف (14.37%) | تعادل (21.18%) | فوز الضيف (64.45%)
+  - النتائج الأكثر تكراراً:
+      * 0-1 (12.85%)
+      * 0-2 (12.64%)
+      * 1-1 (10.64%)
+      * 1-2 (9.59%)
+      * 0-3 (7.97%)
+
+[5] تعلم الآلة (ML.NET)
+  - الاحتمالات المستنتجة: فوز المضيف (0.07%) | تعادل (7.29%) | فوز الضيف (92.64%)
+
+[6] الدمج النهائي (Blend Ensembling)
+  - معامل الدمج (Alpha = ML vs Stat): 0.30
+  - الاحتمالات النهائية: فوز المضيف (5.15%) | تعادل (10.82%) | فوز الضيف (84.03%)
+
+[7] تقييم المخاطرة (Risk Scoring)
+  - النتيجة (Risk Score): 37.3 / 100
+  - مستوى المخاطرة: Medium
+  - المبررات والملاحظات:
+      * مستوى المخاطرة: متوسط (37.3/100)
+الاحتمالات: فوز 5% | تعادل 11% | خسارة 84%
+Shannon Entropy: 0.778 (الأقصى=1.585 → عدم يقين تام)
+جودة البيانات: 100%
+أوزان السوق: غير مُدخلة (لا يمكن حساب EV)
+⚠️ عدم يقين معتدل — تحليل إضافي مُوصى به.
+
+[8] أسواق الرهان المقترحة (Betting Markets)
+  - Asian Handicap: الاحتمال (95.93%) | الخيار (Arsenal +1.5)
+  - Match Goals: الاحتمال (92.43%) | الخيار (Over 0.5 Goals)
+  - Match Goals: الاحتمال (87.02%) | الخيار (Under 4.5 Goals)
+  - Double Chance: الاحتمال (86.20%) | الخيار (Draw or Arsenal)
+  - Asian Handicap: الاحتمال (86.20%) | الخيار (Arsenal +0.5)
+  - Corners Markets (الكورنرات): الاحتمال (79.66%) | الخيار (Arsenal Most Corners)
+  - Double Chance: الاحتمال (77.52%) | الخيار (Wolves or Arsenal)
+  - Match Goals: الاحتمال (74.73%) | الخيار (Over 1.5 Goals)
+  - Match Goals: الاحتمال (72.49%) | الخيار (Under 3.5 Goals)
+  - Corners Markets (الكورنرات): الاحتمال (72.00%) | الخيار (Total Corners Over 8.5)
+  - First Team to Score: الاحتمال (70.10%) | الخيار (Arsenal First Goal)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (65.00%) | الخيار (Total Yellow Cards Over 3.5)
+  - Match Result (1X2): الاحتمال (63.73%) | الخيار (Arsenal Win)
+  - Corners Markets (الكورنرات): الاحتمال (58.00%) | الخيار (Total Corners Over 9.5)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (55.00%) | الخيار (Arsenal Top Striker Anytime Goal)
+  - Both Teams To Score: الاحتمال (54.35%) | الخيار (No)
+  - Odd/Even Goals: الاحتمال (51.26%) | الخيار (Even Total Goals)
+  - Match Goals: الاحتمال (50.58%) | الخيار (Under 2.5 Goals)
+  - Match Goals: الاحتمال (49.42%) | الخيار (Over 2.5 Goals)
+  - Odd/Even Goals: الاحتمال (48.74%) | الخيار (Odd Total Goals)
+  - Clean Sheet: الاحتمال (46.84%) | الخيار (Arsenal Clean Sheet (Yes))
+  - Both Teams To Score: الاحتمال (45.65%) | الخيار (Yes)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (44.00%) | الخيار (Total Yellow Cards Over 4.5)
+  - Corners Markets (الكورنرات): الاحتمال (42.00%) | الخيار (Total Corners Under 9.5)
+  - Corners Markets (الكورنرات): الاحتمال (41.00%) | الخيار (Total Corners Over 10.5)
+  - Winning Margin: الاحتمال (38.70%) | الخيار (Arsenal by 2+ Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (38.24%) | الخيار (Arsenal / Arsenal)
+  - Double Chance: الاحتمال (36.27%) | الخيار (Wolves or Draw)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (35.00%) | الخيار (Total Yellow Cards Under 3.5)
+  - Corners Markets (الكورنرات): الاحتمال (28.00%) | الخيار (Total Corners Under 8.5)
+  - Match Goals: الاحتمال (27.51%) | الخيار (Over 3.5 Goals)
+  - Match Goals: الاحتمال (25.27%) | الخيار (Under 1.5 Goals)
+  - Winning Margin: الاحتمال (25.03%) | الخيار (Arsenal by 1 Goal)
+  - Match Result (1X2): الاحتمال (22.48%) | الخيار (Draw)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (18.00%) | الخيار (Red Card in Match (Yes))
+  - Corners Markets (الكورنرات): الاحتمال (17.24%) | الخيار (Wolves Most Corners)
+  - First Team to Score: الاحتمال (15.18%) | الخيار (Wolves First Goal)
+  - Clean Sheet: الاحتمال (15.07%) | الخيار (Wolves Clean Sheet (Yes))
+  - Match Result (1X2): الاحتمال (13.80%) | الخيار (Wolves Win)
+  - Asian Handicap: الاحتمال (13.80%) | الخيار (Wolves -0.5)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (13.49%) | الخيار (Draw / Draw)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (13.11%) | الخيار (Wolves Top Striker Anytime Goal)
+  - Match Goals: الاحتمال (12.98%) | الخيار (Over 4.5 Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (10.79%) | الخيار (Draw / Wolves)
+  - Winning Margin: الاحتمال (9.73%) | الخيار (Wolves by 1 Goal)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (8.28%) | الخيار (Wolves / Wolves)
+  - Match Goals: الاحتمال (7.57%) | الخيار (Under 0.5 Goals)
+  - First Team to Score: الاحتمال (7.57%) | الخيار (No Goals (0-0))
+  - Asian Handicap: الاحتمال (4.07%) | الخيار (Wolves -1.5)
+  - Winning Margin: الاحتمال (4.07%) | الخيار (Wolves by 2+ Goals)
+
+==================================================
+الخلاصة: فوز Arsenal (84%)
+مؤشر الثقة العام: 62.7%
+==================================================

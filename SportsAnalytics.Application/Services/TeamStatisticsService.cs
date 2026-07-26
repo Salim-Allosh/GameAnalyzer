@@ -49,24 +49,19 @@ public class TeamStatisticsService
 
         if (!recentMatches.Any())
         {
-            // Baseline statistics if team matches are building
             return new TeamDetailedStats
             {
                 TeamName = team.Name,
-                MatchesAnalyzed = numberOfMatches,
-                AvgGoalsScored = 1.65,
-                AvgGoalsConceded = 1.15,
-                AvgCorners = 5.4,
-                AvgYellowCards = 2.1,
-                FormString = "W D W W D",
-                TotalTransfersImpact = 4
+                MatchesAnalyzed = 0
             };
         }
 
-        double totalGoalsScored = 0;
-        double totalGoalsConceded = 0;
-        double totalCorners = 0;
-        double totalYellowCards = 0;
+        var stats = new TeamDetailedStats
+        {
+            TeamName = team.Name,
+            MatchesAnalyzed = recentMatches.Count
+        };
+
         string form = "";
 
         foreach (var match in recentMatches)
@@ -76,40 +71,46 @@ public class TeamStatisticsService
             int goalsScored = isHome ? match.HomeGoals.GetValueOrDefault(0) : match.AwayGoals.GetValueOrDefault(0);
             int goalsConceded = isHome ? match.AwayGoals.GetValueOrDefault(0) : match.HomeGoals.GetValueOrDefault(0);
             
-            totalGoalsScored += goalsScored;
-            totalGoalsConceded += goalsConceded;
+            stats.TotalGoalsScored += goalsScored;
+            stats.TotalGoalsConceded += goalsConceded;
 
-            if (goalsScored > goalsConceded) form += "W ";
-            else if (goalsScored < goalsConceded) form += "L ";
-            else form += "D ";
-
-            if (match.Statistics != null)
+            if (goalsScored > goalsConceded)
             {
-                totalCorners += isHome ? match.Statistics.HomeCorners : match.Statistics.AwayCorners;
-                totalYellowCards += isHome ? match.Statistics.HomeYellowCards : match.Statistics.AwayYellowCards;
+                stats.WinsCount++;
+                form += "W ";
+            }
+            else if (goalsScored < goalsConceded)
+            {
+                stats.LossesCount++;
+                form += "L ";
             }
             else
             {
-                totalCorners += isHome ? 5 : 4;
-                totalYellowCards += 2;
+                stats.DrawsCount++;
+                form += "D ";
+            }
+
+            int totalMatchGoals = goalsScored + goalsConceded;
+            if (totalMatchGoals > 1) stats.Over15GoalsCount++;
+            if (totalMatchGoals > 2) stats.Over25GoalsCount++;
+            if (goalsScored > 0 && goalsConceded > 0) stats.BttsCount++;
+            if (goalsConceded == 0) stats.CleanSheetsCount++;
+
+            if (match.Statistics != null)
+            {
+                stats.TotalCorners += isHome ? match.Statistics.HomeCorners : match.Statistics.AwayCorners;
+                stats.TotalYellowCards += isHome ? match.Statistics.HomeYellowCards : match.Statistics.AwayYellowCards;
+                stats.TotalRedCards += isHome ? match.Statistics.HomeRedCards : match.Statistics.AwayRedCards;
+                stats.TotalShots += isHome ? match.Statistics.HomeShotsTotal : match.Statistics.AwayShotsTotal;
+                stats.TotalShotsOnTarget += isHome ? match.Statistics.HomeShotsOnTarget : match.Statistics.AwayShotsOnTarget;
+                stats.TotalFouls += isHome ? match.Statistics.HomeFouls : match.Statistics.AwayFouls;
             }
         }
 
-        int count = recentMatches.Count;
-        double avgScored = totalGoalsScored / count;
-        double avgConceded = totalGoalsConceded / count;
+        stats.FormString = form.TrimEnd();
+        stats.TotalTransfersImpact = (int)Math.Round((stats.AvgGoalsScored - stats.AvgGoalsConceded) * 3);
 
-        return new TeamDetailedStats
-        {
-            TeamName = team.Name,
-            MatchesAnalyzed = count,
-            AvgGoalsScored = Math.Round(avgScored, 2),
-            AvgGoalsConceded = Math.Round(avgConceded, 2),
-            AvgCorners = Math.Round(totalCorners / count, 1),
-            AvgYellowCards = Math.Round(totalYellowCards / count, 1),
-            FormString = form.TrimEnd(),
-            TotalTransfersImpact = (int)Math.Round((avgScored - avgConceded) * 3) // Real mathematical transfer impact metric
-        };
+        return stats;
     }
 
     public async Task<TeamDetailedStats> GetH2HStatsAsync(int homeTeamId, int awayTeamId, int numberOfMatches)
@@ -148,25 +149,38 @@ public class TeamStatisticsService
             return new TeamDetailedStats
             {
                 TeamName = "المواجهات المباشرة (H2H)",
-                MatchesAnalyzed = numberOfMatches,
-                AvgGoalsScored = 2.6,
-                AvgCorners = 9.8,
-                AvgYellowCards = 4.2
+                MatchesAnalyzed = 0
             };
         }
 
-        int count = h2hMatches.Count;
-        double totalGoals = h2hMatches.Sum(m => m.HomeGoals.GetValueOrDefault(0) + m.AwayGoals.GetValueOrDefault(0));
-        double totalCorners = h2hMatches.Sum(m => m.Statistics != null ? m.Statistics.HomeCorners + m.Statistics.AwayCorners : 9);
-        double totalCards = h2hMatches.Sum(m => m.Statistics != null ? m.Statistics.HomeYellowCards + m.Statistics.AwayYellowCards : 4);
-
-        return new TeamDetailedStats
+        var stats = new TeamDetailedStats
         {
             TeamName = "المواجهات المباشرة (H2H)",
-            MatchesAnalyzed = count,
-            AvgGoalsScored = Math.Round(totalGoals / count, 2),
-            AvgCorners = Math.Round(totalCorners / count, 1),
-            AvgYellowCards = Math.Round(totalCards / count, 1)
+            MatchesAnalyzed = h2hMatches.Count
         };
+
+        foreach (var m in h2hMatches)
+        {
+            int homeG = m.HomeGoals.GetValueOrDefault(0);
+            int awayG = m.AwayGoals.GetValueOrDefault(0);
+            int totalG = homeG + awayG;
+
+            stats.TotalGoalsScored += totalG;
+            if (totalG > 1) stats.Over15GoalsCount++;
+            if (totalG > 2) stats.Over25GoalsCount++;
+            if (homeG > 0 && awayG > 0) stats.BttsCount++;
+
+            if (m.Statistics != null)
+            {
+                stats.TotalCorners += m.Statistics.HomeCorners + m.Statistics.AwayCorners;
+                stats.TotalYellowCards += m.Statistics.HomeYellowCards + m.Statistics.AwayYellowCards;
+                stats.TotalRedCards += m.Statistics.HomeRedCards + m.Statistics.AwayRedCards;
+                stats.TotalShots += m.Statistics.HomeShotsTotal + m.Statistics.AwayShotsTotal;
+                stats.TotalShotsOnTarget += m.Statistics.HomeShotsOnTarget + m.Statistics.AwayShotsOnTarget;
+                stats.TotalFouls += m.Statistics.HomeFouls + m.Statistics.AwayFouls;
+            }
+        }
+
+        return stats;
     }
 }

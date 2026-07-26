@@ -24,6 +24,10 @@ public partial class ReportViewModel : ViewModelBase
     [ObservableProperty]
     private IEnumerable<IGrouping<string, BettingMarketPrediction>> _groupedBettingMarkets = null!;
 
+    // Top value betting markets ordered by highest probability
+    [ObservableProperty]
+    private IEnumerable<BettingMarketPrediction> _topBettingMarkets = null!;
+
     public ReportViewModel(IServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
@@ -33,10 +37,11 @@ public partial class ReportViewModel : ViewModelBase
     {
         Report = report;
         
-        // Group the markets
+        // Group and order the markets
         if (report.BettingMarkets != null)
         {
             GroupedBettingMarkets = report.BettingMarkets.GroupBy(m => m.MarketName).ToList();
+            TopBettingMarkets = report.BettingMarkets.OrderByDescending(m => m.Probability).Take(8).ToList();
         }
 
         SetupChart(report);

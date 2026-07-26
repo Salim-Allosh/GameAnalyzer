@@ -32,35 +32,122 @@ public class PoissonDixonColes
 
         var teams = matchList
             .SelectMany(m => new[] { m.HomeTeam, m.AwayTeam })
+            .Where(t => !string.IsNullOrWhiteSpace(t))
             .Distinct()
             .OrderBy(t => t)
             .ToList();
 
-        // تهيئة المعاملات الابتدائية
-        var initialParams = BuildInitialParams(teams);
-        var paramNames = initialParams.Keys.ToList();
-        var x0 = paramNames.Select(k => initialParams[k]).ToArray();
-
-        // تعظيم Log-Likelihood باستخدام L-BFGS-B (تصغير السالب)
-        double NegLogLikelihood(double[] p)
+        var teamIndexMap = new Dictionary<string, int>();
+        for (int i = 0; i < teams.Count; i++)
         {
-            var pm = BuildParamMap(paramNames, p);
-            return -ComputeLogLikelihood(matchList, pm, teams);
+            teamIndexMap[teams[i]] = i;
         }
 
-        // تحسين بسيط باستخدام gradient descent يدوي (بدون مكتبة خارجية لهذه المرحلة)
-        var optimized = SimpleGradientDescent(x0, NegLogLikelihood, maxIter: 2000, learningRate: 0.05);
-        var finalMap = BuildParamMap(paramNames, optimized);
-
-        // استخراج النتائج
-        foreach (var team in teams)
+        int numTeams = teams.Count;
+        // x[0] = home, x[1] = rho
+        // x[2 + 2*i] = atk_i, x[3 + 2*i] = def_i
+        var x = new double[2 + 2 * numTeams];
+        x[0] = 0.25;  // initial home advantage
+        x[1] = -0.05; // initial rho
+        for (int i = 0; i < numTeams; i++)
         {
-            AttackParams[team] = finalMap.TryGetValue($"atk_{team}", out var a) ? a : 0.0;
-            DefenseParams[team] = finalMap.TryGetValue($"def_{team}", out var d) ? d : 0.0;
+            x[2 + 2 * i] = 0.1;  // atk initial
+            x[3 + 2 * i] = -0.1; // def initial
         }
 
-        HomeAdvantage = finalMap.TryGetValue("home", out var h) ? h : 0.25;
-        RhoCorrection = finalMap.TryGetValue("rho", out var r) ? r : -0.1;
+        // Fast Adam Optimizer for Dixon-Coles log likelihood
+        double lr = 0.02;
+        double beta1 = 0.9;
+        double beta2 = 0.999;
+        double eps = 1e-8;
+
+        var mVec = new double[x.Length];
+        var vVec = new double[x.Length];
+
+        int maxIter = 100;
+        double prevLoss = double.MaxValue;
+
+        for (int iter = 1; iter <= maxIter; iter++)
+        {
+            var grad = new double[x.Length];
+            double homeAdv = x[0];
+            double rho = Math.Clamp(x[1], -0.2, 0.2);
+
+            double currentLoss = 0;
+
+            foreach (var m in matchList)
+            {
+                if (!teamIndexMap.TryGetValue(m.HomeTeam, out int hIdx) ||
+                    !teamIndexMap.TryGetValue(m.AwayTeam, out int aIdx))
+                    continue;
+
+                double atkH = x[2 + 2 * hIdx];
+                double defH = x[3 + 2 * hIdx];
+                double atkA = x[2 + 2 * aIdx];
+                double defA = x[3 + 2 * aIdx];
+
+                double lambdaH = Math.Exp(Math.Clamp(atkH + defA + homeAdv, -3.0, 3.0));
+                double lambdaA = Math.Exp(Math.Clamp(atkA + defH, -3.0, 3.0));
+
+                int hG = m.HomeGoals;
+                int aG = m.AwayGoals;
+
+                double tau = CalculateTau(hG, aG, lambdaH, lambdaA, rho);
+                if (tau <= 0) tau = 1e-6;
+
+                double dTau_dLH = 0, dTau_dLA = 0, dTau_dRho = 0;
+                if (hG == 0 && aG == 0) { dTau_dLH = -lambdaA * rho; dTau_dLA = -lambdaH * rho; dTau_dRho = -lambdaH * lambdaA; }
+                else if (hG == 0 && aG == 1) { dTau_dLH = rho; dTau_dLA = 0; dTau_dRho = lambdaH; }
+                else if (hG == 1 && aG == 0) { dTau_dLH = 0; dTau_dLA = rho; dTau_dRho = lambdaA; }
+                else if (hG == 1 && aG == 1) { dTau_dLH = 0; dTau_dLA = 0; dTau_dRho = -1.0; }
+
+                double gH = (hG - lambdaH) + (lambdaH / tau) * dTau_dLH;
+                double gA = (aG - lambdaA) + (lambdaA / tau) * dTau_dLA;
+
+                double pH = PoissonPmf(lambdaH, hG);
+                double pA = PoissonPmf(lambdaA, aG);
+                if (pH > 0 && pA > 0 && tau > 0)
+                {
+                    currentLoss -= (Math.Log(tau) + Math.Log(pH) + Math.Log(pA));
+                }
+
+                grad[0] -= gH;
+                grad[1] -= (1.0 / tau) * dTau_dRho;
+
+                grad[2 + 2 * hIdx] -= gH;
+                grad[3 + 2 * hIdx] -= gA;
+                grad[2 + 2 * aIdx] -= gA;
+                grad[3 + 2 * aIdx] -= gH;
+            }
+
+            if (Math.Abs(prevLoss - currentLoss) < 1e-5)
+                break;
+            prevLoss = currentLoss;
+
+            for (int i = 0; i < x.Length; i++)
+            {
+                mVec[i] = beta1 * mVec[i] + (1 - beta1) * grad[i];
+                vVec[i] = beta2 * vVec[i] + (1 - beta2) * (grad[i] * grad[i]);
+
+                double mHat = mVec[i] / (1 - Math.Pow(beta1, iter));
+                double vHat = vVec[i] / (1 - Math.Pow(beta2, iter));
+
+                x[i] -= lr * mHat / (Math.Sqrt(vHat) + eps);
+                x[i] = Math.Clamp(x[i], -3.0, 3.0);
+            }
+        }
+
+        AttackParams.Clear();
+        DefenseParams.Clear();
+
+        for (int i = 0; i < numTeams; i++)
+        {
+            AttackParams[teams[i]] = x[2 + 2 * i];
+            DefenseParams[teams[i]] = x[3 + 2 * i];
+        }
+
+        HomeAdvantage = x[0];
+        RhoCorrection = Math.Clamp(x[1], -0.2, 0.2);
         IsTrained = true;
     }
 
@@ -89,7 +176,7 @@ public class PoissonDixonColes
 
         if (!IsTrained || !AttackParams.ContainsKey(hKey) || !AttackParams.ContainsKey(aKey))
         {
-            return (1.6, 1.0); // Baseline expected goals if team not found in training params
+            throw new KeyNotFoundException($"Team not found in trained model: '{homeTeam}' or '{awayTeam}'.");
         }
 
         var atkHome = AttackParams[hKey];

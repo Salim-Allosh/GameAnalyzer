@@ -116,13 +116,21 @@ public class MLMatchPredictor
         var input = ToInput(features, 0);
         var output = _predEngine.Predict(input);
 
-        // تطبيع لضمان المجموع = 1
-        var total = output.HomeWinProb + output.DrawProb + output.AwayWinProb;
-        if (total <= 0) return (0.33, 0.34, 0.33);
+        if (output.Score == null || output.Score.Length < 3)
+            return (0.33, 0.34, 0.33);
 
-        return (output.HomeWinProb / total,
-                output.DrawProb / total,
-                output.AwayWinProb / total);
+        // Softmax temperature calibration (T = 2.5) to convert raw ML.NET tree logits into realistic probabilities
+        double temp = 2.5;
+        double maxScore = output.Score.Max();
+
+        double exp0 = Math.Exp((output.Score[0] - maxScore) / temp);
+        double exp1 = Math.Exp((output.Score[1] - maxScore) / temp);
+        double exp2 = Math.Exp((output.Score[2] - maxScore) / temp);
+
+        double sum = exp0 + exp1 + exp2;
+        if (sum <= 0) return (0.33, 0.34, 0.33);
+
+        return (exp0 / sum, exp1 / sum, exp2 / sum);
     }
 
     /// <summary>

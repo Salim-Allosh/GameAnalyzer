@@ -28,9 +28,9 @@ public class MonteCarloSimulator
     private readonly Random _rng = new(42); // Seed ثابت للاستنساخ
 
     // إعدادات افتراضية
-    public int MinIterations { get; set; } = 10_000;
-    public int MaxIterations { get; set; } = 200_000;
-    public double TargetStdError { get; set; } = 0.002; // 0.2% — هدف الاستقرار
+    public int MinIterations { get; set; } = 5_000;
+    public int MaxIterations { get; set; } = 20_000;
+    public double TargetStdError { get; set; } = 0.003; // 0.3% — هدف الاستقرار
     public int MaxGoals { get; set; } = 10;            // أقصى أهداف تُسجَّل في جدول النتائج
 
     /// <summary>

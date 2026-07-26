@@ -36,7 +36,9 @@ public static class InfrastructureServiceExtensions
         services.AddHttpClient<IStatisticsProvider, ExternalServices.FootballDataClient>();
         services.AddHttpClient<IStatisticsProvider, ExternalServices.StatsBombClient>();
         services.AddHttpClient<IStatisticsProvider, ExternalServices.UnderstatClient>();
+        services.AddHttpClient<ExternalServices.ArabicNewsTranslator>();
         services.AddHttpClient<INewsProvider, ExternalServices.NewsApiClient>();
+        services.AddHttpClient<INewsProvider, ExternalServices.LiveGoogleNewsProvider>();
         
         services.AddHttpClient<ExternalServices.EspnApiClient>();
         services.AddHttpClient<ExternalServices.ApiFootballClient>();

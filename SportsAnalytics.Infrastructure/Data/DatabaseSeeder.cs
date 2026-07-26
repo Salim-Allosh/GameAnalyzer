@@ -159,16 +159,24 @@ public static class DatabaseSeeder
             teamStrengths[team.Id] = strength;
         }
 
-        // Generate 2 seasons of round-robin for each league
-        DateTime startDate = DateTime.UtcNow.AddDays(-700);
+        // Generate 4 seasons of round-robin for each league (2022 to 2026)
+        DateTime startDate = DateTime.UtcNow.AddDays(-1450);
 
         foreach (var league in leagues)
         {
             var leagueTeams = league.ToList();
             if (leagueTeams.Count < 2) continue;
 
-            for (int season = 0; season < 2; season++)
+            for (int season = 0; season < 4; season++)
             {
+                string seasonLabel = season switch
+                {
+                    0 => "2022-2023",
+                    1 => "2023-2024",
+                    2 => "2024-2025",
+                    _ => "2025-2026"
+                };
+
                 for (int i = 0; i < leagueTeams.Count; i++)
                 {
                     for (int j = 0; j < leagueTeams.Count; j++)
@@ -191,11 +199,11 @@ public static class DatabaseSeeder
                         {
                             HomeTeamId = home.Id,
                             AwayTeamId = away.Id,
-                            MatchDate = startDate.AddDays(rand.Next(0, 600)), // random date in the past 2 years
+                            MatchDate = startDate.AddDays((season * 350) + rand.Next(0, 300)),
                             HomeGoals = hGoals,
                             AwayGoals = aGoals,
                             League = league.Key ?? "Unknown",
-                            Season = season == 0 ? "2022-2023" : "2023-2024"
+                            Season = seasonLabel
                         };
                         
                         match.Statistics = new MatchStatistics

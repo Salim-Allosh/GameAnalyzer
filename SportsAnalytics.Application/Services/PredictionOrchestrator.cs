@@ -84,7 +84,11 @@ public class PredictionOrchestrator : IPredictionOrchestrator
         percentProgress?.Report(20);
 
         // ── 0. Ensure Models Auto-Trained on DB History ──
-        var allDbMatches = await _db.Matches.AsNoTracking().Include(m => m.HomeTeam).Include(m => m.AwayTeam).Where(m => m.HomeGoals.HasValue).ToListAsync(ct);
+        var allDbMatches = await _db.Matches.AsNoTracking()
+            .Include(m => m.HomeTeam)
+            .Include(m => m.AwayTeam)
+            .Where(m => m.HomeGoals.HasValue)
+            .ToListAsync(ct);
         
         if (allDbMatches.Count > 0 && !_dixonColes.IsTrained)
         {
@@ -110,10 +114,15 @@ public class PredictionOrchestrator : IPredictionOrchestrator
         statusProgress?.Report("حساب احتمالات Dixon-Coles...");
         percentProgress?.Report(50);
 
-        var (lH, lA) = _dixonColes.ComputeLambdas(homeTeam.Name, awayTeam.Name);
-
-        // Adjust Lambdas based on real features and form if defaults were used
-        if (lH == 1.6 && lA == 1.0)
+        double lH = 1.6;
+        double lA = 1.0;
+        try
+        {
+            var lambdas = _dixonColes.ComputeLambdas(homeTeam.Name, awayTeam.Name);
+            lH = lambdas.LambdaHome;
+            lA = lambdas.LambdaAway;
+        }
+        catch (KeyNotFoundException)
         {
             lH = Math.Max(0.8, (report.Features.HomeAvgGoalsScored + report.Features.AwayAvgGoalsConceded) / 2.0 + 0.3);
             lA = Math.Max(0.6, (report.Features.AwayAvgGoalsScored + report.Features.HomeAvgGoalsConceded) / 2.0);

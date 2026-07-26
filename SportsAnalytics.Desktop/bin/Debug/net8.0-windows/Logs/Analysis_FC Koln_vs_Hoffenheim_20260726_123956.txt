@@ -1,0 +1,109 @@
+﻿==================================================
+تفاصيل تحليل مباراة: FC Koln ضد Hoffenheim
+التاريخ: 2026-07-22
+الدوري: Bundesliga
+وقت التحليل: 26/07/2026 8:39:56 AM
+زمن الحساب: 0.00 ms
+==================================================
+
+[1] هندسة الميزات (Feature Engineering)
+  - أيام الراحة: المضيف (1.0 أيام) | الضيف (1.0 أيام)
+  - الفورمة (آخر 5): المضيف (53.3%) | الضيف (53.3%)
+  - أهداف مسجلة (متوسط): المضيف (2.40) | الضيف (1.40)
+  - أهداف مستقبلة (متوسط): المضيف (2.00) | الضيف (1.00)
+  - المواجهات المباشرة (H2H): نسبة فوز المضيف (20.0%) | التعادل (50.0%)
+  - جودة البيانات التاريخية: 100.0%
+
+[2] نموذج Poisson / Dixon-Coles
+  - قوة الهجوم المتوقعة (Lambda): المضيف = 1.933 | الضيف = 1.423
+  - الاحتمالات المستنتجة: فوز المضيف (49.03%) | تعادل (23.04%) | فوز الضيف (27.93%)
+
+[3] نموذج Elo Rating
+  - تصنيف Elo الحالي: المضيف (1543.1) | الضيف (1539.8)
+  - الاحتمالات المستنتجة: فوز المضيف (41.49%) | تعادل (28.00%) | فوز الضيف (30.51%)
+
+[4] محاكاة Monte Carlo
+  - عدد التكرارات: 20,000
+  - هامش الخطأ القياسي: 0.00354
+  - الاحتمالات المستنتجة: فوز المضيف (49.14%) | تعادل (22.03%) | فوز الضيف (28.83%)
+  - النتائج الأكثر تكراراً:
+      * 1-1 (10.07%)
+      * 2-1 (9.27%)
+      * 1-2 (6.83%)
+      * 2-2 (6.60%)
+      * 2-0 (6.51%)
+
+[5] تعلم الآلة (ML.NET)
+  - الاحتمالات المستنتجة: فوز المضيف (41.49%) | تعادل (28.00%) | فوز الضيف (30.51%)
+
+[6] الدمج النهائي (Blend Ensembling)
+  - معامل الدمج (Alpha = ML vs Stat): 0.30
+  - الاحتمالات النهائية: فوز المضيف (34.75%) | تعادل (34.88%) | فوز الضيف (30.36%)
+
+[7] تقييم المخاطرة (Risk Scoring)
+  - النتيجة (Risk Score): 41.2 / 100
+  - مستوى المخاطرة: Medium
+  - المبررات والملاحظات:
+      * مستوى المخاطرة: متوسط (41.2/100)
+الاحتمالات: فوز 35% | تعادل 35% | خسارة 30%
+Shannon Entropy: 1.582 (الأقصى=1.585 → عدم يقين تام)
+جودة البيانات: 100%
+أوزان السوق: غير مُدخلة (لا يمكن حساب EV)
+⚠️ عدم يقين معتدل — تحليل إضافي مُوصى به.
+
+[8] أسواق الرهان المقترحة (Betting Markets)
+  - Match Goals: الاحتمال (96.03%) | الخيار (Over 0.5 Goals)
+  - Match Goals: الاحتمال (85.29%) | الخيار (Over 1.5 Goals)
+  - Double Chance: الاحتمال (76.96%) | الخيار (FC Koln or Hoffenheim)
+  - Match Goals: الاحتمال (75.23%) | الخيار (Under 4.5 Goals)
+  - Double Chance: الاحتمال (72.07%) | الخيار (FC Koln or Draw)
+  - Corners Markets (الكورنرات): الاحتمال (72.00%) | الخيار (Total Corners Over 8.5)
+  - Asian Handicap: الاحتمال (71.87%) | الخيار (Hoffenheim +1.5)
+  - Both Teams To Score: الاحتمال (65.40%) | الخيار (Yes)
+  - Match Goals: الاحتمال (65.17%) | الخيار (Over 2.5 Goals)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (65.00%) | الخيار (Total Yellow Cards Over 3.5)
+  - Corners Markets (الكورنرات): الاحتمال (61.29%) | الخيار (FC Koln Most Corners)
+  - Corners Markets (الكورنرات): الاحتمال (58.00%) | الخيار (Total Corners Over 9.5)
+  - Match Goals: الاحتمال (56.80%) | الخيار (Under 3.5 Goals)
+  - First Team to Score: الاحتمال (53.93%) | الخيار (FC Koln First Goal)
+  - Odd/Even Goals: الاحتمال (51.02%) | الخيار (Even Total Goals)
+  - Double Chance: الاحتمال (50.97%) | الخيار (Draw or Hoffenheim)
+  - Asian Handicap: الاحتمال (50.97%) | الخيار (Hoffenheim +0.5)
+  - Match Result (1X2): الاحتمال (49.03%) | الخيار (FC Koln Win)
+  - Asian Handicap: الاحتمال (49.03%) | الخيار (FC Koln -0.5)
+  - Odd/Even Goals: الاحتمال (48.98%) | الخيار (Odd Total Goals)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (46.58%) | الخيار (FC Koln Top Striker Anytime Goal)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (44.00%) | الخيار (Total Yellow Cards Over 4.5)
+  - Match Goals: الاحتمال (43.20%) | الخيار (Over 3.5 Goals)
+  - Corners Markets (الكورنرات): الاحتمال (42.00%) | الخيار (Total Corners Under 9.5)
+  - Corners Markets (الكورنرات): الاحتمال (41.00%) | الخيار (Total Corners Over 10.5)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (35.00%) | الخيار (Total Yellow Cards Under 3.5)
+  - Corners Markets (الكورنرات): الاحتمال (34.91%) | الخيار (Hoffenheim Most Corners)
+  - Match Goals: الاحتمال (34.83%) | الخيار (Under 2.5 Goals)
+  - Both Teams To Score: الاحتمال (34.60%) | الخيار (No)
+  - First Team to Score: الاحتمال (30.72%) | الخيار (Hoffenheim First Goal)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (29.42%) | الخيار (FC Koln / FC Koln)
+  - Asian Handicap: الاحتمال (28.13%) | الخيار (FC Koln -1.5)
+  - Winning Margin: الاحتمال (28.13%) | الخيار (FC Koln by 2+ Goals)
+  - Corners Markets (الكورنرات): الاحتمال (28.00%) | الخيار (Total Corners Under 8.5)
+  - Match Result (1X2): الاحتمال (27.93%) | الخيار (Hoffenheim Win)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (26.53%) | الخيار (Hoffenheim Top Striker Anytime Goal)
+  - Match Goals: الاحتمال (24.77%) | الخيار (Over 4.5 Goals)
+  - Clean Sheet: الاحتمال (24.09%) | الخيار (FC Koln Clean Sheet (Yes))
+  - Match Result (1X2): الاحتمال (23.04%) | الخيار (Draw)
+  - Winning Margin: الاحتمال (20.90%) | الخيار (FC Koln by 1 Goal)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (18.00%) | الخيار (Red Card in Match (Yes))
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (16.76%) | الخيار (Hoffenheim / Hoffenheim)
+  - Winning Margin: الاحتمال (15.27%) | الخيار (Hoffenheim by 1 Goal)
+  - Match Goals: الاحتمال (14.71%) | الخيار (Under 1.5 Goals)
+  - Clean Sheet: الاحتمال (14.48%) | الخيار (Hoffenheim Clean Sheet (Yes))
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (13.83%) | الخيار (Draw / Draw)
+  - Winning Margin: الاحتمال (12.66%) | الخيار (Hoffenheim by 2+ Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (11.06%) | الخيار (Draw / FC Koln)
+  - Match Goals: الاحتمال (3.97%) | الخيار (Under 0.5 Goals)
+  - First Team to Score: الاحتمال (3.97%) | الخيار (No Goals (0-0))
+
+==================================================
+الخلاصة: تعادل (35%)
+مؤشر الثقة العام: 58.8%
+==================================================

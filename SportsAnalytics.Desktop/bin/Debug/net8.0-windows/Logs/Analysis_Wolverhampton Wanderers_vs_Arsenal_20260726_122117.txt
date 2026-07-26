@@ -1,0 +1,109 @@
+﻿==================================================
+تفاصيل تحليل مباراة: Wolverhampton Wanderers ضد Arsenal
+التاريخ: 2026-07-26
+الدوري: Premier League
+وقت التحليل: 26/07/2026 8:21:17 AM
+زمن الحساب: 0.00 ms
+==================================================
+
+[1] هندسة الميزات (Feature Engineering)
+  - أيام الراحة: المضيف (8.8 أيام) | الضيف (7.8 أيام)
+  - الفورمة (آخر 5): المضيف (46.7%) | الضيف (66.7%)
+  - أهداف مسجلة (متوسط): المضيف (1.80) | الضيف (2.00)
+  - أهداف مستقبلة (متوسط): المضيف (1.40) | الضيف (1.60)
+  - المواجهات المباشرة (H2H): نسبة فوز المضيف (10.0%) | التعادل (10.0%)
+  - جودة البيانات التاريخية: 100.0%
+
+[2] نموذج Poisson / Dixon-Coles
+  - قوة الهجوم المتوقعة (Lambda): المضيف = 1.079 | الضيف = 1.685
+  - الاحتمالات المستنتجة: فوز المضيف (23.75%) | تعادل (25.30%) | فوز الضيف (50.95%)
+
+[3] نموذج Elo Rating
+  - تصنيف Elo الحالي: المضيف (1451.5) | الضيف (1591.5)
+  - الاحتمالات المستنتجة: فوز المضيف (26.88%) | تعادل (28.00%) | فوز الضيف (45.12%)
+
+[4] محاكاة Monte Carlo
+  - عدد التكرارات: 20,000
+  - هامش الخطأ القياسي: 0.00304
+  - الاحتمالات المستنتجة: فوز المضيف (24.40%) | تعادل (24.17%) | فوز الضيف (51.44%)
+  - النتائج الأكثر تكراراً:
+      * 1-1 (12.04%)
+      * 0-1 (10.05%)
+      * 1-2 (9.66%)
+      * 0-2 (8.95%)
+      * 0-0 (6.88%)
+
+[5] تعلم الآلة (ML.NET)
+  - الاحتمالات المستنتجة: فوز المضيف (1.84%) | تعادل (0.86%) | فوز الضيف (97.29%)
+
+[6] الدمج النهائي (Blend Ensembling)
+  - معامل الدمج (Alpha = ML vs Stat): 0.30
+  - الاحتمالات النهائية: فوز المضيف (12.81%) | تعادل (13.25%) | فوز الضيف (73.94%)
+
+[7] تقييم المخاطرة (Risk Scoring)
+  - النتيجة (Risk Score): 39.2 / 100
+  - مستوى المخاطرة: Medium
+  - المبررات والملاحظات:
+      * مستوى المخاطرة: متوسط (39.2/100)
+الاحتمالات: فوز 13% | تعادل 13% | خسارة 74%
+Shannon Entropy: 1.088 (الأقصى=1.585 → عدم يقين تام)
+جودة البيانات: 100%
+أوزان السوق: غير مُدخلة (لا يمكن حساب EV)
+⚠️ عدم يقين معتدل — تحليل إضافي مُوصى به.
+
+[8] أسواق الرهان المقترحة (Betting Markets)
+  - Match Goals: الاحتمال (93.12%) | الخيار (Over 0.5 Goals)
+  - Asian Handicap: الاحتمال (90.86%) | الخيار (Arsenal +1.5)
+  - Match Goals: الاحتمال (85.32%) | الخيار (Under 4.5 Goals)
+  - Match Goals: الاحتمال (76.85%) | الخيار (Over 1.5 Goals)
+  - Double Chance: الاحتمال (76.25%) | الخيار (Draw or Arsenal)
+  - Asian Handicap: الاحتمال (76.25%) | الخيار (Arsenal +0.5)
+  - Double Chance: الاحتمال (74.70%) | الخيار (Wolverhampton Wanderers or Arsenal)
+  - Corners Markets (الكورنرات): الاحتمال (72.00%) | الخيار (Total Corners Over 8.5)
+  - Match Goals: الاحتمال (69.99%) | الخيار (Under 3.5 Goals)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (65.00%) | الخيار (Total Yellow Cards Over 3.5)
+  - Corners Markets (الكورنرات): الاحتمال (63.69%) | الخيار (Arsenal Most Corners)
+  - Corners Markets (الكورنرات): الاحتمال (58.00%) | الخيار (Total Corners Over 9.5)
+  - First Team to Score: الاحتمال (56.04%) | الخيار (Arsenal First Goal)
+  - Both Teams To Score: الاحتمال (54.35%) | الخيار (Yes)
+  - Match Goals: الاحتمال (52.19%) | الخيار (Over 2.5 Goals)
+  - Odd/Even Goals: الاحتمال (51.34%) | الخيار (Even Total Goals)
+  - Match Result (1X2): الاحتمال (50.95%) | الخيار (Arsenal Win)
+  - Double Chance: الاحتمال (49.05%) | الخيار (Wolverhampton Wanderers or Draw)
+  - Odd/Even Goals: الاحتمال (48.66%) | الخيار (Odd Total Goals)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (48.40%) | الخيار (Arsenal Top Striker Anytime Goal)
+  - Match Goals: الاحتمال (47.81%) | الخيار (Under 2.5 Goals)
+  - Both Teams To Score: الاحتمال (45.65%) | الخيار (No)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (44.00%) | الخيار (Total Yellow Cards Over 4.5)
+  - Corners Markets (الكورنرات): الاحتمال (42.00%) | الخيار (Total Corners Under 9.5)
+  - Corners Markets (الكورنرات): الاحتمال (41.00%) | الخيار (Total Corners Over 10.5)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (35.00%) | الخيار (Total Yellow Cards Under 3.5)
+  - Clean Sheet: الاحتمال (33.98%) | الخيار (Arsenal Clean Sheet (Yes))
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (30.57%) | الخيار (Arsenal / Arsenal)
+  - Match Goals: الاحتمال (30.01%) | الخيار (Over 3.5 Goals)
+  - Corners Markets (الكورنرات): الاحتمال (29.68%) | الخيار (Wolverhampton Wanderers Most Corners)
+  - Corners Markets (الكورنرات): الاحتمال (28.00%) | الخيار (Total Corners Under 8.5)
+  - Winning Margin: الاحتمال (27.83%) | الخيار (Arsenal by 2+ Goals)
+  - First Team to Score: الاحتمال (26.12%) | الخيار (Wolverhampton Wanderers First Goal)
+  - Match Result (1X2): الاحتمال (25.30%) | الخيار (Draw)
+  - Match Result (1X2): الاحتمال (23.75%) | الخيار (Wolverhampton Wanderers Win)
+  - Asian Handicap: الاحتمال (23.75%) | الخيار (Wolverhampton Wanderers -0.5)
+  - Match Goals: الاحتمال (23.15%) | الخيار (Under 1.5 Goals)
+  - Winning Margin: الاحتمال (23.11%) | الخيار (Arsenal by 1 Goal)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (22.56%) | الخيار (Wolverhampton Wanderers Top Striker Anytime Goal)
+  - Clean Sheet: الاحتمال (18.55%) | الخيار (Wolverhampton Wanderers Clean Sheet (Yes))
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (18.00%) | الخيار (Red Card in Match (Yes))
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (15.18%) | الخيار (Draw / Draw)
+  - Match Goals: الاحتمال (14.68%) | الخيار (Over 4.5 Goals)
+  - Winning Margin: الاحتمال (14.60%) | الخيار (Wolverhampton Wanderers by 1 Goal)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (14.25%) | الخيار (Wolverhampton Wanderers / Wolverhampton Wanderers)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (12.15%) | الخيار (Draw / Wolverhampton Wanderers)
+  - Asian Handicap: الاحتمال (9.14%) | الخيار (Wolverhampton Wanderers -1.5)
+  - Winning Margin: الاحتمال (9.14%) | الخيار (Wolverhampton Wanderers by 2+ Goals)
+  - Match Goals: الاحتمال (6.88%) | الخيار (Under 0.5 Goals)
+  - First Team to Score: الاحتمال (6.88%) | الخيار (No Goals (0-0))
+
+==================================================
+الخلاصة: فوز Arsenal (74%)
+مؤشر الثقة العام: 60.8%
+==================================================

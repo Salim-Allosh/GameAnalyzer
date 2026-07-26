@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:SportsAnalytics.Desktop.ViewModels"
         mc:Ignorable="d"
-        Title="إحصائيات متقدمة وتحليل الأخبار" Height="800" Width="1200" WindowState="Maximized" WindowStartupLocation="CenterScreen"
+        Title="إحصائيات متقدمة وتحليل الأخبار" Height="850" Width="1250" WindowState="Maximized" WindowStartupLocation="CenterScreen"
         d:DataContext="{d:DesignInstance Type=vm:AdvancedStatisticsViewModel}">
     
     <Window.Resources>
@@ -38,30 +38,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-        <!-- Modern DataGrid Style -->
-        <Style TargetType="DataGrid">
-            <Setter Property="Background" Value="#252526"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="BorderBrush" Value="#3F3F46"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="RowBackground" Value="#1E1E1E"/>
-            <Setter Property="AlternatingRowBackground" Value="#2D2D30"/>
-            <Setter Property="GridLinesVisibility" Value="Horizontal"/>
-            <Setter Property="HorizontalGridLinesBrush" Value="#3F3F46"/>
-            <Setter Property="HeadersVisibility" Value="Column"/>
-            <Setter Property="RowHeight" Value="35"/>
-        </Style>
-
-        <!-- Modern DataGridColumnHeader Style -->
-        <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="#333337"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="BorderThickness" Value="0,0,1,1"/>
-            <Setter Property="BorderBrush" Value="#3F3F46"/>
-        </Style>
     </Window.Resources>
 
     <Grid Background="#1E1E1E" FlowDirection="RightToLeft">
@@ -73,15 +49,15 @@
 
         <!-- Header -->
         <Border Grid.Row="0" Background="#2D2D30" BorderBrush="#3F3F46" BorderThickness="0,0,0,1" Padding="20">
-            <TextBlock Text="تحليل الإحصائيات والأخبار" FontSize="28" FontWeight="Bold" Foreground="White" />
+            <TextBlock Text="إحصائيات الفرق الفردية التفصيلية وتحليل الأخبار الحية" FontSize="26" FontWeight="Bold" Foreground="White" />
         </Border>
 
         <!-- Filters -->
         <Border Grid.Row="1" Background="#252526" Padding="20">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="حساب المتوسط لآخر (عدد المباريات):" Foreground="White" FontSize="16" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                <TextBlock Text="عدد المباريات الأخيرة للتحليل:" Foreground="White" FontSize="16" VerticalAlignment="Center" Margin="0,0,15,0"/>
                 <TextBox Text="{Binding NumberOfMatches, UpdateSourceTrigger=PropertyChanged}" Width="70" FontSize="16" Margin="0,0,15,0" Padding="5" TextAlignment="Center" Background="#333337" Foreground="White" BorderBrush="#555"/>
-                <Button Content="تطبيق الفلتر" Command="{Binding ApplyFilterCommand}" Padding="20,8" FontSize="16" Background="#007ACC" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
+                <Button Content="تطبيق وتحليل البيانات والأخبار" Command="{Binding ApplyFilterCommand}" Padding="20,8" FontSize="16" Background="#007ACC" Foreground="White" FontWeight="Bold" BorderThickness="0" Cursor="Hand">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Style.Triggers>
@@ -100,111 +76,513 @@
         <TabControl Grid.Row="2" Margin="20" Background="Transparent">
             <!-- Home Team Tab -->
             <TabItem Header="{Binding HomeStats.TeamName, FallbackValue='الفريق الأول'}">
-                <Grid Margin="0,20,0,0">
+                <Grid Margin="0,15,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5.5*"/>
                         <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="4.5*"/>
                     </Grid.ColumnDefinitions>
 
+                    <!-- Stats Column -->
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="{Binding HomeStats.TeamName}" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,0,0,5"/>
-                        <TextBlock Text="{Binding HomeStats.MatchesAnalyzed, StringFormat='تم تحليل {0} مباريات'}" FontSize="14" Margin="0,0,0,20" Foreground="#AAA"/>
+                        <TextBlock Text="{Binding HomeStats.MatchesAnalyzed, StringFormat='تم تحليل إحصائيات آخر {0} مباريات دقيقة من قاعدة البيانات'}" FontSize="13" Margin="0,0,0,15" Foreground="#AAA"/>
 
-                        <Border BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="20" Background="#252526">
+                        <Border BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="15" Background="#252526">
                             <StackPanel>
-                                <TextBlock Text="متوسطات الرهانات" Foreground="#007ACC" FontWeight="Bold" Margin="0,0,0,15" FontSize="18"/>
-                                <TextBlock Text="{Binding HomeStats.AvgGoalsScored, StringFormat='الأهداف المسجلة: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
-                                <TextBlock Text="{Binding HomeStats.AvgGoalsConceded, StringFormat='الأهداف المستقبلة: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
-                                <TextBlock Text="{Binding HomeStats.AvgCorners, StringFormat='متوسط الركنيات: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
-                                <TextBlock Text="{Binding HomeStats.AvgYellowCards, StringFormat='البطاقات الصفراء: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
+                                <TextBlock Text="جدول الأعداد الصحيحة والمتوسطات لأسواق الرهان 📊" Foreground="#007ACC" FontWeight="Bold" Margin="0,0,0,12" FontSize="16"/>
+                                
+                                <!-- Table Header -->
+                                <Border Background="#1E1E1E" CornerRadius="4" Padding="8,6" Margin="0,0,0,6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="المؤشر الإحصائي / سوق الرهان" Foreground="#AAA" FontWeight="Bold" FontSize="12"/>
+                                        <TextBlock Grid.Column="1" Text="الإجمالي الصحيح" Foreground="#FFC107" FontWeight="Bold" FontSize="12" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="المتوسط/مباراة" Foreground="#4CAF50" FontWeight="Bold" FontSize="12" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="3" Text="نسبة التحقق" Foreground="#007ACC" FontWeight="Bold" FontSize="12" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="450">
+                                    <StackPanel>
+                                        <!-- Goals Scored -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="⚽ الأهداف المسجلة" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.TotalGoalsScored, StringFormat={}{0} هدف}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding HomeStats.AvgGoalsScored, StringFormat={}{0:F2}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Goals Conceded -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🛡️ الأهداف المستقبلة" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.TotalGoalsConceded, StringFormat={}{0} هدف}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding HomeStats.AvgGoalsConceded, StringFormat={}{0:F2}}" Foreground="#F44336" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Corners -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🚩 الركنيات" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.TotalCorners, StringFormat={}{0} ركنية}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding HomeStats.AvgCorners, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Yellow Cards -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🟨 بطاقات صفراء" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.TotalYellowCards, StringFormat={}{0} كرت}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding HomeStats.AvgYellowCards, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Red Cards -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🟥 بطاقات حمراء" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.TotalRedCards, StringFormat={}{0} كرت}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding HomeStats.AvgRedCards, StringFormat={}{0:F2}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Shots -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🎯 التسديدات الإجمالية" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.TotalShots, StringFormat={}{0} تسديدة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding HomeStats.AvgShots, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Shots On Target -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🎯 تسديدات على المرمى" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.TotalShotsOnTarget, StringFormat={}{0} تسديدة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding HomeStats.AvgShotsOnTarget, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <Separator Background="#3F3F46" Margin="0,8"/>
+
+                                        <!-- Over 1.5 Goals -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="📈 مباريات أكثر من 1.5 هدف" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.Over15GoalsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding HomeStats.Over15Percentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Over 2.5 Goals -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="📈 مباريات أكثر من 2.5 هدف" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.Over25GoalsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding HomeStats.Over25Percentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- BTTS Both Teams To Score -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🤝 تسجيل الفريقين (BTTS)" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.BttsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding HomeStats.BttsPercentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Clean Sheets -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🧤 شباك نظيفة (Clean Sheet)" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding HomeStats.CleanSheetsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding HomeStats.CleanSheetPercentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+
                                 <Separator Background="#3F3F46" Margin="0,15"/>
-                                <TextBlock Text="{Binding HomeStats.FormString, StringFormat='مستوى الفريق (Form): {0}'}" Foreground="#28A745" FontSize="16" FontWeight="SemiBold" Margin="0,5"/>
-                                <TextBlock Text="{Binding HomeStats.TotalTransfersImpact, StringFormat='تأثير الانتقالات: {0}'}" Foreground="#FFC107" FontSize="16" Margin="0,5"/>
+                                <Grid>
+                                    <TextBlock Text="{Binding HomeStats.FormString, StringFormat='سلسلة النتائج (Form): {0}'}" Foreground="#28A745" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding HomeStats.WinPercentage, StringFormat='نسبة الفوز: {0:F1}%'}" Foreground="#FFC107" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="2">
-                        <TextBlock Text="تحليل الأخبار (AI Impact)" Foreground="White" FontSize="20" FontWeight="Bold" Margin="0,0,0,15"/>
-                        <DataGrid ItemsSource="{Binding HomeNews}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" VerticalScrollBarVisibility="Auto" MinHeight="300">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="المصدر" Binding="{Binding SourceName}" Width="150"/>
-                                <DataGridTextColumn Header="الخبر" Binding="{Binding Title}" Width="*">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Padding" Value="5"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Header="التأثير (%)" Binding="{Binding ImpactPercentage, StringFormat={}{0:F1}%}" Width="100"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
+                    <!-- News Column -->
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="تحليل وتأثير الأخبار الحية 📰" Foreground="White" FontSize="20" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBlock Grid.Row="1" Text="أحدث الأخبار المستخرجة للفريق مع نسبة التأثير الرياضي (AI Impact Score):" Foreground="#AAA" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,12"/>
+
+                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding HomeNews}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#252526" BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,10" Cursor="Hand">
+                                            <Border.InputBindings>
+                                                <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.OpenNewsDetailCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
+                                            </Border.InputBindings>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid Grid.Row="0" Margin="0,0,0,8">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                        <Border Background="#333337" CornerRadius="4" Padding="6,2" Margin="0,0,8,0">
+                                                            <TextBlock Text="{Binding SourceName}" Foreground="#FFC107" FontSize="11" FontWeight="Bold"/>
+                                                        </Border>
+                                                        <TextBlock Text="{Binding PublishedAt, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Foreground="#777" FontSize="11" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+
+                                                    <Border HorizontalAlignment="Right" Background="#1E3A1E" CornerRadius="4" Padding="8,2">
+                                                        <TextBlock Text="{Binding ImpactPercentage, StringFormat={}{0:F1}%}" Foreground="#4CAF50" FontWeight="Bold" FontSize="12"/>
+                                                    </Border>
+                                                </Grid>
+
+                                                <TextBlock Grid.Row="1" Text="{Binding Title}" Foreground="White" FontSize="14" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,5"/>
+                                                <TextBlock Grid.Row="2" Text="{Binding Description}" Foreground="#AAA" FontSize="12" TextWrapping="Wrap" LineHeight="16"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
                 </Grid>
             </TabItem>
 
             <!-- Away Team Tab -->
             <TabItem Header="{Binding AwayStats.TeamName, FallbackValue='الفريق الثاني'}">
-                <Grid Margin="0,20,0,0">
+                <Grid Margin="0,15,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="5.5*"/>
                         <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="4.5*"/>
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
                         <TextBlock Text="{Binding AwayStats.TeamName}" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,0,0,5"/>
-                        <TextBlock Text="{Binding AwayStats.MatchesAnalyzed, StringFormat='تم تحليل {0} مباريات'}" FontSize="14" Margin="0,0,0,20" Foreground="#AAA"/>
+                        <TextBlock Text="{Binding AwayStats.MatchesAnalyzed, StringFormat='تم تحليل إحصائيات آخر {0} مباريات دقيقة من قاعدة البيانات'}" FontSize="13" Margin="0,0,0,15" Foreground="#AAA"/>
 
-                        <Border BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="20" Background="#252526">
+                        <Border BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="15" Background="#252526">
                             <StackPanel>
-                                <TextBlock Text="متوسطات الرهانات" Foreground="#007ACC" FontWeight="Bold" Margin="0,0,0,15" FontSize="18"/>
-                                <TextBlock Text="{Binding AwayStats.AvgGoalsScored, StringFormat='الأهداف المسجلة: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
-                                <TextBlock Text="{Binding AwayStats.AvgGoalsConceded, StringFormat='الأهداف المستقبلة: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
-                                <TextBlock Text="{Binding AwayStats.AvgCorners, StringFormat='متوسط الركنيات: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
-                                <TextBlock Text="{Binding AwayStats.AvgYellowCards, StringFormat='البطاقات الصفراء: {0:F2}'}" Foreground="White" FontSize="16" Margin="0,5"/>
+                                <TextBlock Text="جدول الأعداد الصحيحة والمتوسطات لأسواق الرهان 📊" Foreground="#007ACC" FontWeight="Bold" Margin="0,0,0,12" FontSize="16"/>
+                                
+                                <!-- Table Header -->
+                                <Border Background="#1E1E1E" CornerRadius="4" Padding="8,6" Margin="0,0,0,6">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.2*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="1*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="المؤشر الإحصائي / سوق الرهان" Foreground="#AAA" FontWeight="Bold" FontSize="12"/>
+                                        <TextBlock Grid.Column="1" Text="الإجمالي الصحيح" Foreground="#FFC107" FontWeight="Bold" FontSize="12" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="المتوسط/مباراة" Foreground="#4CAF50" FontWeight="Bold" FontSize="12" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="3" Text="نسبة التحقق" Foreground="#007ACC" FontWeight="Bold" FontSize="12" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="450">
+                                    <StackPanel>
+                                        <!-- Goals Scored -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="⚽ الأهداف المسجلة" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.TotalGoalsScored, StringFormat={}{0} هدف}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding AwayStats.AvgGoalsScored, StringFormat={}{0:F2}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Goals Conceded -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🛡️ الأهداف المستقبلة" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.TotalGoalsConceded, StringFormat={}{0} هدف}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding AwayStats.AvgGoalsConceded, StringFormat={}{0:F2}}" Foreground="#F44336" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Corners -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🚩 الركنيات" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.TotalCorners, StringFormat={}{0} ركنية}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding AwayStats.AvgCorners, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Yellow Cards -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🟨 بطاقات صفراء" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.TotalYellowCards, StringFormat={}{0} كرت}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding AwayStats.AvgYellowCards, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Red Cards -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🟥 بطاقات حمراء" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.TotalRedCards, StringFormat={}{0} كرت}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding AwayStats.AvgRedCards, StringFormat={}{0:F2}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Shots -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🎯 التسديدات الإجمالية" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.TotalShots, StringFormat={}{0} تسديدة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding AwayStats.AvgShots, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Shots On Target -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🎯 تسديدات على المرمى" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.TotalShotsOnTarget, StringFormat={}{0} تسديدة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding AwayStats.AvgShotsOnTarget, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <Separator Background="#3F3F46" Margin="0,8"/>
+
+                                        <!-- Over 1.5 Goals -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="📈 مباريات أكثر من 1.5 هدف" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.Over15GoalsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding AwayStats.Over15Percentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Over 2.5 Goals -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="📈 مباريات أكثر من 2.5 هدف" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.Over25GoalsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding AwayStats.Over25Percentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- BTTS Both Teams To Score -->
+                                        <Border Padding="8,5">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🤝 تسجيل الفريقين (BTTS)" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.BttsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding AwayStats.BttsPercentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+
+                                        <!-- Clean Sheets -->
+                                        <Border Padding="8,5" Background="#1A1A1C">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/><ColumnDefinition Width="1*"/></Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="🧤 شباك نظيفة (Clean Sheet)" Foreground="White" FontSize="13"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding AwayStats.CleanSheetsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="2" Text="-" Foreground="#777" TextAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding AwayStats.CleanSheetPercentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+
                                 <Separator Background="#3F3F46" Margin="0,15"/>
-                                <TextBlock Text="{Binding AwayStats.FormString, StringFormat='مستوى الفريق (Form): {0}'}" Foreground="#28A745" FontSize="16" FontWeight="SemiBold" Margin="0,5"/>
-                                <TextBlock Text="{Binding AwayStats.TotalTransfersImpact, StringFormat='تأثير الانتقالات: {0}'}" Foreground="#FFC107" FontSize="16" Margin="0,5"/>
+                                <Grid>
+                                    <TextBlock Text="{Binding AwayStats.FormString, StringFormat='سلسلة النتائج (Form): {0}'}" Foreground="#28A745" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Left"/>
+                                    <TextBlock Text="{Binding AwayStats.WinPercentage, StringFormat='نسبة الفوز: {0:F1}%'}" Foreground="#FFC107" FontSize="14" FontWeight="Bold" HorizontalAlignment="Right"/>
+                                </Grid>
                             </StackPanel>
                         </Border>
                     </StackPanel>
 
-                    <StackPanel Grid.Column="2">
-                        <TextBlock Text="تحليل الأخبار (AI Impact)" Foreground="White" FontSize="20" FontWeight="Bold" Margin="0,0,0,15"/>
-                        <DataGrid ItemsSource="{Binding AwayNews}" AutoGenerateColumns="False" IsReadOnly="True" HeadersVisibility="Column" VerticalScrollBarVisibility="Auto" MinHeight="300">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="المصدر" Binding="{Binding SourceName}" Width="150"/>
-                                <DataGridTextColumn Header="الخبر" Binding="{Binding Title}" Width="*">
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Padding" Value="5"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn Header="التأثير (%)" Binding="{Binding ImpactPercentage, StringFormat={}{0:F1}%}" Width="100"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </StackPanel>
+                    <!-- News Column -->
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="تحليل وتأثير الأخبار الحية 📰" Foreground="White" FontSize="20" FontWeight="Bold" Margin="0,0,0,5"/>
+                        <TextBlock Grid.Row="1" Text="أحدث الأخبار المستخرجة للفريق مع نسبة التأثير الرياضي (AI Impact Score):" Foreground="#AAA" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,12"/>
+
+                        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding AwayNews}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Background="#252526" BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,0,0,10" Cursor="Hand">
+                                            <Border.InputBindings>
+                                                <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.OpenNewsDetailCommand, RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}"/>
+                                            </Border.InputBindings>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <Grid Grid.Row="0" Margin="0,0,0,8">
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                                        <Border Background="#333337" CornerRadius="4" Padding="6,2" Margin="0,0,8,0">
+                                                            <TextBlock Text="{Binding SourceName}" Foreground="#FFC107" FontSize="11" FontWeight="Bold"/>
+                                                        </Border>
+                                                        <TextBlock Text="{Binding PublishedAt, StringFormat={}{0:dd/MM/yyyy HH:mm}}" Foreground="#777" FontSize="11" VerticalAlignment="Center"/>
+                                                    </StackPanel>
+
+                                                    <Border HorizontalAlignment="Right" Background="#1E3A1E" CornerRadius="4" Padding="8,2">
+                                                        <TextBlock Text="{Binding ImpactPercentage, StringFormat={}{0:F1}%}" Foreground="#4CAF50" FontWeight="Bold" FontSize="12"/>
+                                                    </Border>
+                                                </Grid>
+
+                                                <TextBlock Grid.Row="1" Text="{Binding Title}" Foreground="White" FontSize="14" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,5"/>
+                                                <TextBlock Grid.Row="2" Text="{Binding Description}" Foreground="#AAA" FontSize="12" TextWrapping="Wrap" LineHeight="16"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
                 </Grid>
             </TabItem>
 
             <!-- H2H Tab -->
             <TabItem Header="المواجهات المباشرة (H2H)">
                 <Grid Margin="0,20,0,0">
-                    <StackPanel HorizontalAlignment="Center" Width="500">
+                    <StackPanel HorizontalAlignment="Center" Width="600">
                         <TextBlock Text="{Binding H2hStats.TeamName}" Foreground="White" FontSize="24" FontWeight="Bold" Margin="0,0,0,5" TextAlignment="Center"/>
-                        <TextBlock Text="{Binding H2hStats.MatchesAnalyzed, StringFormat='تم تحليل {0} مباريات سابقة بين الفريقين'}" FontSize="14" Margin="0,0,0,30" Foreground="#AAA" TextAlignment="Center"/>
+                        <TextBlock Text="{Binding H2hStats.MatchesAnalyzed, StringFormat='تم تحليل {0} مباريات مباشرة بين الفريقين من قاعدة البيانات'}" FontSize="14" Margin="0,0,0,20" Foreground="#AAA" TextAlignment="Center"/>
 
-                        <Border BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="30" Background="#252526">
+                        <Border BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="20" Background="#252526">
                             <StackPanel>
-                                <TextBlock Text="متوسط إحصائيات المباريات المشتركة" Foreground="#007ACC" FontWeight="Bold" Margin="0,0,0,20" FontSize="20" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding H2hStats.AvgGoalsScored, StringFormat='إجمالي الأهداف في المباراة: {0:F2}'}" Foreground="White" FontSize="18" Margin="0,10" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding H2hStats.AvgCorners, StringFormat='إجمالي الركنيات: {0:F2}'}" Foreground="White" FontSize="18" Margin="0,10" TextAlignment="Center"/>
-                                <TextBlock Text="{Binding H2hStats.AvgYellowCards, StringFormat='إجمالي البطاقات الصفراء: {0:F2}'}" Foreground="White" FontSize="18" Margin="0,10" TextAlignment="Center"/>
+                                <TextBlock Text="إحصائيات إجمالية ومتوسطات المواجهات المباشرة 🤝" Foreground="#007ACC" FontWeight="Bold" Margin="0,0,0,15" FontSize="18" TextAlignment="Center"/>
+                                
+                                <Border Background="#1E1E1E" CornerRadius="4" Padding="8,6" Margin="0,0,0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                            <ColumnDefinition Width="1.2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="نوع الرهان والمؤشر المشترك" Foreground="#AAA" FontWeight="Bold" FontSize="13"/>
+                                        <TextBlock Grid.Column="1" Text="الإجمالي الصحيح" Foreground="#FFC107" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="المتوسط/مباراة" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <Border Padding="8,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="1.2*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="⚽ إجمالي الأهداف المسجلة" Foreground="White" FontSize="14"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding H2hStats.TotalGoalsScored, StringFormat={}{0} هدف}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding H2hStats.AvgGoalsScored, StringFormat={}{0:F2}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <Border Padding="8,8" Background="#1A1A1C">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="1.2*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="🚩 إجمالي الركنيات" Foreground="White" FontSize="14"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding H2hStats.TotalCorners, StringFormat={}{0} ركنية}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding H2hStats.AvgCorners, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <Border Padding="8,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="1.2*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="🟨 إجمالي البطاقات الصفراء" Foreground="White" FontSize="14"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding H2hStats.TotalYellowCards, StringFormat={}{0} كرت}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding H2hStats.AvgYellowCards, StringFormat={}{0:F1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <Border Padding="8,8" Background="#1A1A1C">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="1.2*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="📈 مباريات (+1.5 هدف)" Foreground="White" FontSize="14"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding H2hStats.Over15GoalsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding H2hStats.Over15Percentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <Border Padding="8,8">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions><ColumnDefinition Width="2.2*"/><ColumnDefinition Width="1.2*"/><ColumnDefinition Width="1.2*"/></Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="📈 مباريات (+2.5 هدف)" Foreground="White" FontSize="14"/>
+                                        <TextBlock Grid.Column="1" Text="{Binding H2hStats.Over25GoalsCount, StringFormat={}{0} مباراة}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="{Binding H2hStats.Over25Percentage, StringFormat={}{0:F1}%}" Foreground="#007ACC" FontWeight="Bold" FontSize="14" TextAlignment="Center"/>
+                                    </Grid>
+                                </Border>
                             </StackPanel>
                         </Border>
                     </StackPanel>

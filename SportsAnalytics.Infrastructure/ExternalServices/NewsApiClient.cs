@@ -1,6 +1,9 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
-using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using SportsAnalytics.Domain.Interfaces;
 using SportsAnalytics.Domain.Models;
 
@@ -18,35 +21,19 @@ public class NewsApiClient : INewsProvider
     {
         _httpClient = httpClient;
         _logger = logger;
-        _apiKey = configuration["ApiKeys:NewsApi"] ?? "DEMO_KEY";
+        _apiKey = configuration["ApiKeys:NewsApi"] ?? string.Empty;
     }
 
     public async Task<IEnumerable<UnifiedNewsData>> GetNewsAsync(string query, int maxItems = 5)
     {
-        _logger.LogInformation("Fetching news from NewsAPI for query: {Query}", query);
-        
-        await Task.Delay(50); // محاكاة وقت الشبكة
-        
-        var news = new List<UnifiedNewsData>
+        // If no real API key configured, return empty so LiveGoogleNewsProvider handles live news fetching
+        if (string.IsNullOrEmpty(_apiKey) || _apiKey == "DEMO_KEY")
         {
-            new UnifiedNewsData
-            {
-                Title = $"{query} coach discusses upcoming match strategy",
-                Description = $"In a recent press conference, the coach of {query} highlighted key tactics.",
-                SourceName = "BBC Sport",
-                PublishedAt = DateTime.UtcNow.AddHours(-2),
-                Url = $"https://news.bbc.co.uk/search?q={query}"
-            },
-            new UnifiedNewsData
-            {
-                Title = $"Injury update for {query} star player",
-                Description = "A major player might miss the next match due to a hamstring injury.",
-                SourceName = "Sky Sports",
-                PublishedAt = DateTime.UtcNow.AddHours(-5),
-                Url = $"https://skysports.com/search?q={query}"
-            }
-        };
+            return Enumerable.Empty<UnifiedNewsData>();
+        }
 
-        return news.Take(maxItems);
+        _logger.LogInformation("Fetching news from NewsAPI for query: {Query}", query);
+        await Task.Delay(10);
+        return Enumerable.Empty<UnifiedNewsData>();
     }
 }

@@ -1,0 +1,109 @@
+﻿==================================================
+تفاصيل تحليل مباراة: Freiburg ضد Bayern Munich
+التاريخ: 2026-07-25
+الدوري: Bundesliga
+وقت التحليل: 26/07/2026 8:29:58 AM
+زمن الحساب: 0.00 ms
+==================================================
+
+[1] هندسة الميزات (Feature Engineering)
+  - أيام الراحة: المضيف (3.1 أيام) | الضيف (12.1 أيام)
+  - الفورمة (آخر 5): المضيف (66.7%) | الضيف (26.7%)
+  - أهداف مسجلة (متوسط): المضيف (1.60) | الضيف (1.60)
+  - أهداف مستقبلة (متوسط): المضيف (1.20) | الضيف (1.40)
+  - المواجهات المباشرة (H2H): نسبة فوز المضيف (0.0%) | التعادل (30.0%)
+  - جودة البيانات التاريخية: 100.0%
+
+[2] نموذج Poisson / Dixon-Coles
+  - قوة الهجوم المتوقعة (Lambda): المضيف = 1.666 | الضيف = 1.768
+  - الاحتمالات المستنتجة: فوز المضيف (36.18%) | تعادل (23.44%) | فوز الضيف (40.38%)
+
+[3] نموذج Elo Rating
+  - تصنيف Elo الحالي: المضيف (1521.5) | الضيف (1562.1)
+  - الاحتمالات المستنتجة: فوز المضيف (36.97%) | تعادل (28.00%) | فوز الضيف (35.03%)
+
+[4] محاكاة Monte Carlo
+  - عدد التكرارات: 20,000
+  - هامش الخطأ القياسي: 0.00340
+  - الاحتمالات المستنتجة: فوز المضيف (36.30%) | تعادل (22.75%) | فوز الضيف (40.94%)
+  - النتائج الأكثر تكراراً:
+      * 1-1 (9.98%)
+      * 1-2 (8.40%)
+      * 2-1 (7.92%)
+      * 2-2 (7.00%)
+      * 0-1 (5.23%)
+
+[5] تعلم الآلة (ML.NET)
+  - الاحتمالات المستنتجة: فوز المضيف (0.58%) | تعادل (0.32%) | فوز الضيف (99.10%)
+
+[6] الدمج النهائي (Blend Ensembling)
+  - معامل الدمج (Alpha = ML vs Stat): 0.30
+  - الاحتمالات النهائية: فوز المضيف (14.69%) | تعادل (19.69%) | فوز الضيف (65.62%)
+
+[7] تقييم المخاطرة (Risk Scoring)
+  - النتيجة (Risk Score): 39.9 / 100
+  - مستوى المخاطرة: Medium
+  - المبررات والملاحظات:
+      * مستوى المخاطرة: متوسط (39.9/100)
+الاحتمالات: فوز 15% | تعادل 20% | خسارة 66%
+Shannon Entropy: 1.267 (الأقصى=1.585 → عدم يقين تام)
+جودة البيانات: 100%
+أوزان السوق: غير مُدخلة (لا يمكن حساب EV)
+⚠️ عدم يقين معتدل — تحليل إضافي مُوصى به.
+
+[8] أسواق الرهان المقترحة (Betting Markets)
+  - Match Goals: الاحتمال (96.30%) | الخيار (Over 0.5 Goals)
+  - Match Goals: الاحتمال (86.17%) | الخيار (Over 1.5 Goals)
+  - Asian Handicap: الاحتمال (81.63%) | الخيار (Bayern Munich +1.5)
+  - Double Chance: الاحتمال (76.56%) | الخيار (Freiburg or Bayern Munich)
+  - Match Goals: الاحتمال (73.78%) | الخيار (Under 4.5 Goals)
+  - Corners Markets (الكورنرات): الاحتمال (72.00%) | الخيار (Total Corners Over 8.5)
+  - Both Teams To Score: الاحتمال (67.74%) | الخيار (Yes)
+  - Match Goals: الاحتمال (66.68%) | الخيار (Over 2.5 Goals)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (65.00%) | الخيار (Total Yellow Cards Over 3.5)
+  - Asian Handicap: الاحتمال (63.82%) | الخيار (Bayern Munich +0.5)
+  - Double Chance: الاحتمال (63.82%) | الخيار (Draw or Bayern Munich)
+  - Double Chance: الاحتمال (59.62%) | الخيار (Freiburg or Draw)
+  - Corners Markets (الكورنرات): الاحتمال (58.00%) | الخيار (Total Corners Over 9.5)
+  - Match Goals: الاحتمال (55.09%) | الخيار (Under 3.5 Goals)
+  - Odd/Even Goals: الاحتمال (51.00%) | الخيار (Even Total Goals)
+  - Corners Markets (الكورنرات): الاحتمال (50.48%) | الخيار (Bayern Munich Most Corners)
+  - Odd/Even Goals: الاحتمال (49.00%) | الخيار (Odd Total Goals)
+  - Corners Markets (الكورنرات): الاحتمال (45.22%) | الخيار (Freiburg Most Corners)
+  - Match Goals: الاحتمال (44.91%) | الخيار (Over 3.5 Goals)
+  - First Team to Score: الاحتمال (44.42%) | الخيار (Bayern Munich First Goal)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (44.00%) | الخيار (Total Yellow Cards Over 4.5)
+  - Corners Markets (الكورنرات): الاحتمال (42.00%) | الخيار (Total Corners Under 9.5)
+  - Corners Markets (الكورنرات): الاحتمال (41.00%) | الخيار (Total Corners Over 10.5)
+  - Match Result (1X2): الاحتمال (40.38%) | الخيار (Bayern Munich Win)
+  - First Team to Score: الاحتمال (39.79%) | الخيار (Freiburg First Goal)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (38.37%) | الخيار (Bayern Munich Top Striker Anytime Goal)
+  - Match Result (1X2): الاحتمال (36.18%) | الخيار (Freiburg Win)
+  - Asian Handicap: الاحتمال (36.18%) | الخيار (Freiburg -0.5)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (35.00%) | الخيار (Total Yellow Cards Under 3.5)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (34.37%) | الخيار (Freiburg Top Striker Anytime Goal)
+  - Match Goals: الاحتمال (33.32%) | الخيار (Under 2.5 Goals)
+  - Both Teams To Score: الاحتمال (32.26%) | الخيار (No)
+  - Corners Markets (الكورنرات): الاحتمال (28.00%) | الخيار (Total Corners Under 8.5)
+  - Match Goals: الاحتمال (26.22%) | الخيار (Over 4.5 Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (24.23%) | الخيار (Bayern Munich / Bayern Munich)
+  - Match Result (1X2): الاحتمال (23.44%) | الخيار (Draw)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (21.71%) | الخيار (Freiburg / Freiburg)
+  - Winning Margin: الاحتمال (21.46%) | الخيار (Bayern Munich by 2+ Goals)
+  - Winning Margin: الاحتمال (18.93%) | الخيار (Bayern Munich by 1 Goal)
+  - Clean Sheet: الاحتمال (18.90%) | الخيار (Bayern Munich Clean Sheet (Yes))
+  - Asian Handicap: الاحتمال (18.37%) | الخيار (Freiburg -1.5)
+  - Winning Margin: الاحتمال (18.37%) | الخيار (Freiburg by 2+ Goals)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (18.00%) | الخيار (Red Card in Match (Yes))
+  - Winning Margin: الاحتمال (17.81%) | الخيار (Freiburg by 1 Goal)
+  - Clean Sheet: الاحتمال (17.07%) | الخيار (Freiburg Clean Sheet (Yes))
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (14.06%) | الخيار (Draw / Draw)
+  - Match Goals: الاحتمال (13.83%) | الخيار (Under 1.5 Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (11.25%) | الخيار (Draw / Freiburg)
+  - Match Goals: الاحتمال (3.70%) | الخيار (Under 0.5 Goals)
+  - First Team to Score: الاحتمال (3.70%) | الخيار (No Goals (0-0))
+
+==================================================
+الخلاصة: فوز Bayern Munich (66%)
+مؤشر الثقة العام: 60.1%
+==================================================

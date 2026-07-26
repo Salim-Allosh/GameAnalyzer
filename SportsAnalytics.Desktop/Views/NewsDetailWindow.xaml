@@ -1,0 +1,51 @@
+<Window x:Class="SportsAnalytics.Desktop.Views.NewsDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="تفاصيل الخبر الرياضي والتحليل" Height="500" Width="700"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="#1E1E1E" FlowDirection="RightToLeft">
+    
+    <Border Padding="25">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Badge & Source -->
+            <Grid Grid.Row="0" Margin="0,0,0,15">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <Border Background="#007ACC" CornerRadius="4" Padding="10,4" Margin="0,0,10,0">
+                        <TextBlock x:Name="SourceTextBlock" Text="BBC Sport" Foreground="White" FontWeight="Bold" FontSize="13"/>
+                    </Border>
+                    <TextBlock x:Name="DateTextBlock" Text="26/07/2026 14:30" Foreground="#AAA" FontSize="13" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <Border HorizontalAlignment="Right" Background="#1E3A1E" CornerRadius="6" Padding="12,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="التأثير الرياضي: " Foreground="#AAA" FontSize="13" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="ImpactTextBlock" Text="+45.0%" Foreground="#4CAF50" FontWeight="Bold" FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Title -->
+            <TextBlock Grid.Row="1" x:Name="TitleTextBlock" Text="عنوان الخبر الرئيسي" Foreground="White" FontSize="20" FontWeight="Bold" TextWrapping="Wrap" Margin="0,0,0,15" LineHeight="28"/>
+
+            <!-- Detailed Description Content -->
+            <Border Grid.Row="2" Background="#252526" BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="18" Margin="0,0,0,20">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="DescriptionTextBlock" Text="تفاصيل الخبر..." Foreground="#DDD" FontSize="15" TextWrapping="Wrap" LineHeight="24"/>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Actions Footer -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Left">
+                <Button x:Name="OpenUrlButton" Content="🌐 فتح الخبر المصدر" Click="OpenUrlButton_Click" Padding="20,10" Background="#007ACC" Foreground="White" FontWeight="Bold" FontSize="14" BorderThickness="0" Cursor="Hand" Margin="0,0,10,0"/>
+                <Button Content="إغلاق" Click="CloseButton_Click" Padding="25,10" Background="#333337" Foreground="White" FontWeight="SemiBold" FontSize="14" BorderThickness="0" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

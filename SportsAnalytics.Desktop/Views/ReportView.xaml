@@ -146,97 +146,123 @@
                 <!-- Models Comparison -->
                 <Border Grid.Column="2" Style="{StaticResource ModernCardStyle}">
                     <StackPanel>
-                        <TextBlock Text="تفاصيل النماذج المستخدمة" FontSize="18" FontWeight="SemiBold" Foreground="#007ACC" Margin="0,0,0,15"/>
-                        
-                        <Grid>
+                        <TextBlock Text="تفاصيل النماذج الإحصائية والذكاء الاصطناعي 🤖" FontSize="18" FontWeight="Bold" Foreground="#007ACC" Margin="0,0,0,8"/>
+                        <TextBlock Text="يوضح هذا القسم احتمالات نتائج المباراة المستخرجة من كل نموذج حسابي بشكل منفصل قبل الدمج النهائي:" Foreground="#AAA" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,12"/>
+
+                        <Grid Margin="0,0,0,10">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.5*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
-                            
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Dixon-Coles:" Foreground="#AAA" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10"/>
-                            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
-                                <TextBlock Text="{Binding Report.DcHomeWin, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="SemiBold" FontSize="15"/>
-                                <TextBlock Text=" / " Foreground="#555" FontSize="15"/>
-                                <TextBlock Text="{Binding Report.DcDraw, StringFormat={}{0:P1}}" Foreground="#FFC107" FontWeight="SemiBold" FontSize="15"/>
-                                <TextBlock Text=" / " Foreground="#555" FontSize="15"/>
-                                <TextBlock Text="{Binding Report.DcAwayWin, StringFormat={}{0:P1}}" Foreground="#F44336" FontWeight="SemiBold" FontSize="15"/>
-                            </StackPanel>
-                            
-                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Elo Rating:" Foreground="#AAA" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10"/>
-                            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
-                                <TextBlock Text="{Binding Report.EloRatingHome, StringFormat={}{0:F0}}" Foreground="#4CAF50" FontWeight="SemiBold" FontSize="15"/>
-                                <TextBlock Text=" vs " Foreground="#555" FontSize="15"/>
-                                <TextBlock Text="{Binding Report.EloRatingAway, StringFormat={}{0:F0}}" Foreground="#F44336" FontWeight="SemiBold" FontSize="15"/>
-                            </StackPanel>
 
-                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Elo Prob:" Foreground="#AAA" FontSize="15" VerticalAlignment="Center" Margin="0,0,0,10"/>
-                            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,10">
-                                <TextBlock Text="{Binding Report.EloHomeWin, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="SemiBold" FontSize="15"/>
-                                <TextBlock Text=" / " Foreground="#555" FontSize="15"/>
-                                <TextBlock Text="{Binding Report.EloDraw, StringFormat={}{0:P1}}" Foreground="#FFC107" FontWeight="SemiBold" FontSize="15"/>
-                                <TextBlock Text=" / " Foreground="#555" FontSize="15"/>
-                                <TextBlock Text="{Binding Report.EloAwayWin, StringFormat={}{0:P1}}" Foreground="#F44336" FontWeight="SemiBold" FontSize="15"/>
-                            </StackPanel>
+                            <!-- Table Header -->
+                            <Border Grid.Row="0" Grid.ColumnSpan="4" Background="#252526" CornerRadius="4" Padding="6,6" Margin="0,0,0,8">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1.5*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="النموذج الحسابي" Foreground="#007ACC" FontWeight="Bold" FontSize="12"/>
+                                    <TextBlock Grid.Column="1" Text="{Binding Report.HomeTeam, StringFormat={}فوز {0}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="12" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Grid.Column="2" Text="التعادل" Foreground="#FFC107" FontWeight="Bold" FontSize="12"/>
+                                    <TextBlock Grid.Column="3" Text="{Binding Report.AwayTeam, StringFormat={}فوز {0}}" Foreground="#F44336" FontWeight="Bold" FontSize="12" TextTrimming="CharacterEllipsis"/>
+                                </Grid>
+                            </Border>
 
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="ML.NET:" Foreground="#AAA" FontSize="15" VerticalAlignment="Center"/>
-                            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                                <TextBlock Text="{Binding Report.MlHomeWin, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="SemiBold" FontSize="15"/>
-                                <TextBlock Text=" / " Foreground="#555" FontSize="15"/>
-                                <TextBlock Text="{Binding Report.MlDraw, StringFormat={}{0:P1}}" Foreground="#FFC107" FontWeight="SemiBold" FontSize="15"/>
-                                <TextBlock Text=" / " Foreground="#555" FontSize="15"/>
-                                <TextBlock Text="{Binding Report.MlAwayWin, StringFormat={}{0:P1}}" Foreground="#F44336" FontWeight="SemiBold" FontSize="15"/>
-                            </StackPanel>
+                            <!-- Row 1: Dixon-Coles -->
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Dixon-Coles (بواسون)" Foreground="White" FontSize="13" VerticalAlignment="Center" Margin="4,6"/>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Report.DcHomeWin, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Report.DcDraw, StringFormat={}{0:P1}}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="3" Text="{Binding Report.DcAwayWin, StringFormat={}{0:P1}}" Foreground="#F44336" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+
+                            <!-- Row 2: Elo Probabilities -->
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Elo Rating (احتمالات)" Foreground="White" FontSize="13" VerticalAlignment="Center" Margin="4,6"/>
+                            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Report.EloHomeWin, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Report.EloDraw, StringFormat={}{0:P1}}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Grid.Column="3" Text="{Binding Report.EloAwayWin, StringFormat={}{0:P1}}" Foreground="#F44336" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+
+                            <!-- Row 3: ML.NET -->
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="ML.NET (تعلم الآلة)" Foreground="White" FontSize="13" VerticalAlignment="Center" Margin="4,6"/>
+                            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Report.MlHomeWin, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Report.MlDraw, StringFormat={}{0:P1}}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="3" Grid.Column="3" Text="{Binding Report.MlAwayWin, StringFormat={}{0:P1}}" Foreground="#F44336" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+
+                            <!-- Row 4: Monte Carlo -->
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Monte Carlo (محاكاة)" Foreground="White" FontSize="13" VerticalAlignment="Center" Margin="4,6"/>
+                            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Report.McHomeWin, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Report.McDraw, StringFormat={}{0:P1}}" Foreground="#FFC107" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="4" Grid.Column="3" Text="{Binding Report.McAwayWin, StringFormat={}{0:P1}}" Foreground="#F44336" FontWeight="Bold" FontSize="14" VerticalAlignment="Center"/>
                         </Grid>
+
+                        <Separator Background="#3F3F46" Margin="0,5,0,10"/>
+
+                        <!-- Elo Strength Rating Breakdown -->
+                        <TextBlock Text="مؤشر القوة التراكمي (Elo Points):" Foreground="#AAA" FontSize="12" Margin="0,0,0,6"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Border Background="#252526" CornerRadius="6" Padding="10,6" Margin="0,0,10,0">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Report.HomeTeam}" Foreground="#4CAF50" FontWeight="Bold" FontSize="13" Margin="0,0,6,0"/>
+                                    <TextBlock Text="{Binding Report.EloRatingHome, StringFormat={}{0:F0} نقطة}" Foreground="White" FontWeight="Bold" FontSize="13"/>
+                                </StackPanel>
+                            </Border>
+                            <TextBlock Text="ضد" Foreground="#777" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                            <Border Background="#252526" CornerRadius="6" Padding="10,6">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Report.AwayTeam}" Foreground="#F44336" FontWeight="Bold" FontSize="13" Margin="0,0,6,0"/>
+                                    <TextBlock Text="{Binding Report.EloRatingAway, StringFormat={}{0:F0} نقطة}" Foreground="White" FontWeight="Bold" FontSize="13"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
             </Grid>
 
-            <!-- Numbers & Statistics Explanation Table -->
+            <!-- Top Value Betting Markets -->
             <Border Grid.Row="3" Style="{StaticResource ModernCardStyle}">
                 <StackPanel>
-                    <TextBlock Text="جدول تفصيل ودلالة الأرقام والحسابات الإحصائية 📊" FontSize="18" FontWeight="Bold" Foreground="#007ACC" Margin="0,0,0,15"/>
-                    <TextBlock Text="يوضح هذا الجدول مصدر كل رقم ظاهر في الشاشة، الفريق التابع له، طريقة حسابه الرياضية، ودلالته العملية في التوقع." Foreground="#AAA" Margin="0,0,0,15" TextWrapping="Wrap"/>
-                    
-                    <DataGrid ItemsSource="{Binding Report.NumberExplanations}" AutoGenerateColumns="False" 
-                              Background="#1E1E1E" RowBackground="#252526" AlternatingRowBackground="#2D2D30" 
-                              Foreground="White" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#3F3F46" 
-                              HeadersVisibility="Column" BorderThickness="0" CanUserAddRows="False" IsReadOnly="True">
-                        <DataGrid.Resources>
-                            <Style TargetType="DataGridColumnHeader">
-                                <Setter Property="Background" Value="#333337"/>
-                                <Setter Property="Foreground" Value="#007ACC"/>
-                                <Setter Property="FontWeight" Value="Bold"/>
-                                <Setter Property="Padding" Value="10,8"/>
-                                <Setter Property="FontSize" Value="14"/>
-                            </Style>
-                            <Style TargetType="DataGridCell">
-                                <Setter Property="Padding" Value="10,8"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="DataGridCell">
-                                            <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
-                                                <ContentPresenter VerticalAlignment="Center"/>
+                    <TextBlock Text="أعلى الفرص والقيم المتوقعة من أسواق المراهنات (Top Value Markets) 💎" FontSize="18" FontWeight="Bold" Foreground="#007ACC" Margin="0,0,0,8"/>
+                    <TextBlock Text="يعرض هذا القسم أعلى التوقعات والخيارات ذات الاحتمالية المرتفعة والمجدية إحصائياً مرتبة حسب درجة الأرجحية والنجاح:" Foreground="#AAA" FontSize="13" TextWrapping="Wrap" Margin="0,0,0,15"/>
+
+                    <ItemsControl ItemsSource="{Binding TopBettingMarkets}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="4" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#252526" BorderBrush="#3F3F46" BorderThickness="1" CornerRadius="8" Padding="12,10" Margin="5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <TextBlock Grid.Row="0" Text="{Binding MarketName}" Foreground="#AAA" FontSize="11" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Grid.Row="1" Text="{Binding Selection}" Foreground="White" FontSize="15" FontWeight="Bold" Margin="0,4,0,6" TextTrimming="CharacterEllipsis"/>
+                                        
+                                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Border Background="#1E3A1E" CornerRadius="4" Padding="8,3">
+                                                <TextBlock Text="{Binding Probability, StringFormat={}{0:P1}}" Foreground="#4CAF50" FontWeight="Bold" FontSize="14"/>
                                             </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="الرقم / النسبة" Binding="{Binding NumberValue}" FontWeight="Bold" Width="130"/>
-                            <DataGridTextColumn Header="الفريق / الجهة" Binding="{Binding TeamName}" Foreground="#FFC107" Width="150"/>
-                            <DataGridTextColumn Header="المؤشر" Binding="{Binding MetricName}" FontWeight="SemiBold" Width="200"/>
-                            <DataGridTextColumn Header="الدلالة والمعنى الإحصائي" Binding="{Binding Meaning}" Width="*"/>
-                            <DataGridTextColumn Header="طريقة الحساب والمصدر" Binding="{Binding SourceCalculation}" Foreground="#AAA" Width="*"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Border>
 

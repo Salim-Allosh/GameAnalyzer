@@ -136,6 +136,11 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border x:Name="MatchCard" Style="{StaticResource MatchCardStyle}">
+                                <Border.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" 
+                                                  Command="{Binding DataContext.AnalyzeMatchCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                                  CommandParameter="{Binding}" />
+                                </Border.InputBindings>
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -188,8 +193,8 @@
                                                 </Style.Triggers>
                                             </Style>
                                         </Border.Style>
-                                        <Button Content="تحليل المباراة" 
-                                                Command="{Binding DataContext.AnalyzeCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                                        <Button Content="تحليل المباراة ⚡" 
+                                                Command="{Binding DataContext.AnalyzeMatchCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                                                 CommandParameter="{Binding}" 
                                                 Background="#007ACC" Foreground="White" FontWeight="Bold" Padding="15,10" 
                                                 HorizontalAlignment="Center" VerticalAlignment="Center" BorderThickness="0" Cursor="Hand" />

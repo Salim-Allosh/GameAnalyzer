@@ -1,0 +1,109 @@
+﻿==================================================
+تفاصيل تحليل مباراة: Chelsea ضد Arsenal
+التاريخ: 2026-07-26
+الدوري: Premier League
+وقت التحليل: 26/07/2026 9:12:03 AM
+زمن الحساب: 0.00 ms
+==================================================
+
+[1] هندسة الميزات (Feature Engineering)
+  - أيام الراحة: المضيف (4.8 أيام) | الضيف (7.8 أيام)
+  - الفورمة (آخر 5): المضيف (66.7%) | الضيف (66.7%)
+  - أهداف مسجلة (متوسط): المضيف (2.00) | الضيف (2.00)
+  - أهداف مستقبلة (متوسط): المضيف (0.60) | الضيف (1.60)
+  - المواجهات المباشرة (H2H): نسبة فوز المضيف (10.0%) | التعادل (20.0%)
+  - جودة البيانات التاريخية: 100.0%
+
+[2] نموذج Poisson / Dixon-Coles
+  - قوة الهجوم المتوقعة (Lambda): المضيف = 1.615 | الضيف = 1.790
+  - الاحتمالات المستنتجة: فوز المضيف (34.62%) | تعادل (23.50%) | فوز الضيف (41.87%)
+
+[3] نموذج Elo Rating
+  - تصنيف Elo الحالي: المضيف (1528.0) | الضيف (1591.5)
+  - الاحتمالات المستنتجة: فوز المضيف (34.60%) | تعادل (28.00%) | فوز الضيف (37.40%)
+
+[4] محاكاة Monte Carlo
+  - عدد التكرارات: 20,000
+  - هامش الخطأ القياسي: 0.00338
+  - الاحتمالات المستنتجة: فوز المضيف (35.13%) | تعادل (22.81%) | فوز الضيف (42.07%)
+  - النتائج الأكثر تكراراً:
+      * 1-1 (10.08%)
+      * 1-2 (8.59%)
+      * 2-1 (7.75%)
+      * 2-2 (6.94%)
+      * 0-1 (5.47%)
+
+[5] تعلم الآلة (ML.NET)
+  - الاحتمالات المستنتجة: فوز المضيف (29.02%) | تعادل (31.60%) | فوز الضيف (39.38%)
+
+[6] الدمج النهائي (Blend Ensembling)
+  - معامل الدمج (Alpha = ML vs Stat): 0.30
+  - الاحتمالات النهائية: فوز المضيف (22.30%) | تعادل (24.57%) | فوز الضيف (53.13%)
+
+[7] تقييم المخاطرة (Risk Scoring)
+  - النتيجة (Risk Score): 40.7 / 100
+  - مستوى المخاطرة: Medium
+  - المبررات والملاحظات:
+      * مستوى المخاطرة: متوسط (40.7/100)
+الاحتمالات: فوز 22% | تعادل 25% | خسارة 53%
+Shannon Entropy: 1.465 (الأقصى=1.585 → عدم يقين تام)
+جودة البيانات: 100%
+أوزان السوق: غير مُدخلة (لا يمكن حساب EV)
+⚠️ عدم يقين معتدل — تحليل إضافي مُوصى به.
+
+[8] أسواق الرهان المقترحة (Betting Markets)
+  - Match Goals: الاحتمال (96.20%) | الخيار (Over 0.5 Goals)
+  - Match Goals: الاحتمال (85.84%) | الخيار (Over 1.5 Goals)
+  - Asian Handicap: الاحتمال (82.79%) | الخيار (Arsenal +1.5)
+  - Double Chance: الاحتمال (76.50%) | الخيار (Chelsea or Arsenal)
+  - Match Goals: الاحتمال (74.34%) | الخيار (Under 4.5 Goals)
+  - Corners Markets (الكورنرات): الاحتمال (72.00%) | الخيار (Total Corners Over 8.5)
+  - Both Teams To Score: الاحتمال (67.21%) | الخيار (Yes)
+  - Match Goals: الاحتمال (66.11%) | الخيار (Over 2.5 Goals)
+  - Double Chance: الاحتمال (65.38%) | الخيار (Draw or Arsenal)
+  - Asian Handicap: الاحتمال (65.38%) | الخيار (Arsenal +0.5)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (65.00%) | الخيار (Total Yellow Cards Over 3.5)
+  - Double Chance: الاحتمال (58.13%) | الخيار (Chelsea or Draw)
+  - Corners Markets (الكورنرات): الاحتمال (58.00%) | الخيار (Total Corners Over 9.5)
+  - Match Goals: الاحتمال (55.74%) | الخيار (Under 3.5 Goals)
+  - Corners Markets (الكورنرات): الاحتمال (52.34%) | الخيار (Arsenal Most Corners)
+  - Odd/Even Goals: الاحتمال (51.02%) | الخيار (Even Total Goals)
+  - Odd/Even Goals: الاحتمال (48.98%) | الخيار (Odd Total Goals)
+  - First Team to Score: الاحتمال (46.06%) | الخيار (Arsenal First Goal)
+  - Match Goals: الاحتمال (44.26%) | الخيار (Over 3.5 Goals)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (44.00%) | الخيار (Total Yellow Cards Over 4.5)
+  - Corners Markets (الكورنرات): الاحتمال (43.28%) | الخيار (Chelsea Most Corners)
+  - Corners Markets (الكورنرات): الاحتمال (42.00%) | الخيار (Total Corners Under 9.5)
+  - Match Result (1X2): الاحتمال (41.87%) | الخيار (Arsenal Win)
+  - Corners Markets (الكورنرات): الاحتمال (41.00%) | الخيار (Total Corners Over 10.5)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (39.78%) | الخيار (Arsenal Top Striker Anytime Goal)
+  - First Team to Score: الاحتمال (38.09%) | الخيار (Chelsea First Goal)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (35.00%) | الخيار (Total Yellow Cards Under 3.5)
+  - Match Result (1X2): الاحتمال (34.62%) | الخيار (Chelsea Win)
+  - Asian Handicap: الاحتمال (34.62%) | الخيار (Chelsea -0.5)
+  - Match Goals: الاحتمال (33.89%) | الخيار (Under 2.5 Goals)
+  - Goalscorers (مسجلو الأهداف): الاحتمال (32.89%) | الخيار (Chelsea Top Striker Anytime Goal)
+  - Both Teams To Score: الاحتمال (32.79%) | الخيار (No)
+  - Corners Markets (الكورنرات): الاحتمال (28.00%) | الخيار (Total Corners Under 8.5)
+  - Match Goals: الاحتمال (25.66%) | الخيار (Over 4.5 Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (25.12%) | الخيار (Arsenal / Arsenal)
+  - Match Result (1X2): الاحتمال (23.50%) | الخيار (Draw)
+  - Winning Margin: الاحتمال (22.52%) | الخيار (Arsenal by 2+ Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (20.77%) | الخيار (Chelsea / Chelsea)
+  - Clean Sheet: الاحتمال (19.89%) | الخيار (Arsenal Clean Sheet (Yes))
+  - Winning Margin: الاحتمال (19.35%) | الخيار (Arsenal by 1 Goal)
+  - Cards Markets (البطاقات والإنذارات): الاحتمال (18.00%) | الخيار (Red Card in Match (Yes))
+  - Winning Margin: الاحتمال (17.42%) | الخيار (Chelsea by 1 Goal)
+  - Asian Handicap: الاحتمال (17.21%) | الخيار (Chelsea -1.5)
+  - Winning Margin: الاحتمال (17.21%) | الخيار (Chelsea by 2+ Goals)
+  - Clean Sheet: الاحتمال (16.70%) | الخيار (Chelsea Clean Sheet (Yes))
+  - Match Goals: الاحتمال (14.16%) | الخيار (Under 1.5 Goals)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (14.10%) | الخيار (Draw / Draw)
+  - Half-Time / Full-Time (الشوط الأول / المباراة): الاحتمال (11.28%) | الخيار (Draw / Chelsea)
+  - Match Goals: الاحتمال (3.80%) | الخيار (Under 0.5 Goals)
+  - First Team to Score: الاحتمال (3.80%) | الخيار (No Goals (0-0))
+
+==================================================
+الخلاصة: فوز Arsenal (53%)
+مؤشر الثقة العام: 59.3%
+==================================================

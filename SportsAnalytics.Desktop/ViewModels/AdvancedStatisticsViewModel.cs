@@ -53,6 +53,17 @@ public partial class AdvancedStatisticsViewModel : ViewModelBase
         _ = LoadDataAsync();
     }
 
+    [RelayCommand]
+    private void OpenNewsDetail(NewsImpact news)
+    {
+        if (news != null)
+        {
+            var window = new Views.NewsDetailWindow(news);
+            window.Owner = System.Windows.Application.Current.MainWindow;
+            window.ShowDialog();
+        }
+    }
+
     private async Task LoadDataAsync()
     {
         if (IsLoading) return;

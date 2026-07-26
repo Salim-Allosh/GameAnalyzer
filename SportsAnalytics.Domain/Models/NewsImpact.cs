@@ -8,6 +8,7 @@ public class NewsImpact
     public string Description { get; set; } = string.Empty;
     public DateTime PublishedAt { get; set; }
     public string SourceName { get; set; } = string.Empty;
+    public string Url { get; set; } = string.Empty;
     
     /// <summary>
     /// Score from -100 to 100 representing the sentiment/impact on the team's chance of winning.

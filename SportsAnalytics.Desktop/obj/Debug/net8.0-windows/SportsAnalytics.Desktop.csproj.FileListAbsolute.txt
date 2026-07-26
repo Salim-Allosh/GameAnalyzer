@@ -299,3 +299,5 @@ d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeA
 d:\Bets\SportsAnalytics.Desktop\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 d:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\PredictionArchiveView.g.cs
 d:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\PredictionArchiveView.baml
+D:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\NewsDetailWindow.baml
+D:\Bets\SportsAnalytics.Desktop\obj\Debug\net8.0-windows\Views\NewsDetailWindow.g.cs

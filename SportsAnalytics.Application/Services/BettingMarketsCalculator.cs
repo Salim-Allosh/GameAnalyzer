@@ -77,9 +77,9 @@ public class BettingMarketsCalculator
         markets.Add(new BettingMarketPrediction { MarketName = "Match Result (1X2)", Selection = $"{awayTeam} Win", Probability = awayWin });
 
         // ── 2. Double Chance ──
-        markets.Add(new BettingMarketPrediction { MarketName = "Double Chance", Selection = $"{homeTeam} or Draw (1X)", Probability = homeWin + draw });
-        markets.Add(new BettingMarketPrediction { MarketName = "Double Chance", Selection = "Draw or " + awayTeam + " (X2)", Probability = draw + awayWin });
-        markets.Add(new BettingMarketPrediction { MarketName = "Double Chance", Selection = $"{homeTeam} or {awayTeam} (12)", Probability = homeWin + awayWin });
+        markets.Add(new BettingMarketPrediction { MarketName = "Double Chance", Selection = $"{homeTeam} or Draw", Probability = homeWin + draw });
+        markets.Add(new BettingMarketPrediction { MarketName = "Double Chance", Selection = $"Draw or {awayTeam}", Probability = draw + awayWin });
+        markets.Add(new BettingMarketPrediction { MarketName = "Double Chance", Selection = $"{homeTeam} or {awayTeam}", Probability = homeWin + awayWin });
 
         // ── 3. Over / Under (Match Goals) ──
         markets.Add(new BettingMarketPrediction { MarketName = "Match Goals", Selection = "Over 0.5 Goals", Probability = over05 });
@@ -94,8 +94,8 @@ public class BettingMarketsCalculator
         markets.Add(new BettingMarketPrediction { MarketName = "Match Goals", Selection = "Under 4.5 Goals", Probability = under45 });
 
         // ── 4. Both Teams To Score (BTTS) ──
-        markets.Add(new BettingMarketPrediction { MarketName = "Both Teams To Score", Selection = "Yes (BTTS)", Probability = bttsYes });
-        markets.Add(new BettingMarketPrediction { MarketName = "Both Teams To Score", Selection = "No (BTTS)", Probability = bttsNo });
+        markets.Add(new BettingMarketPrediction { MarketName = "Both Teams To Score", Selection = "Yes", Probability = bttsYes });
+        markets.Add(new BettingMarketPrediction { MarketName = "Both Teams To Score", Selection = "No", Probability = bttsNo });
 
         // ── 5. Asian Handicap ──
         markets.Add(new BettingMarketPrediction { MarketName = "Asian Handicap", Selection = $"{homeTeam} -0.5", Probability = ahHomeMinus05 });
